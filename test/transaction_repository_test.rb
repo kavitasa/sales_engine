@@ -4,7 +4,7 @@ require_relative '../lib/transaction_repository'
 class TransactionRepositoryTest < Minitest::Test
 
   def test_it_returns_all_instances
-    skip
+    assert_equal 33, @transactions.all.count
   end
 
   def test_it_returns_random_instance

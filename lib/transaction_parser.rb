@@ -11,20 +11,16 @@ class TransactionParser
   end
 
   def change_csv_to_transactions
-    csv_data = load_data
-    convert_data_to_transactions(csv_data)
+    convert_data_to_transactions(data)
   end
 
-  def load_data
+  def data
     CSV.open("data/" + "#{file_name}", headers: true, header_converters: :symbol)
   end
 
-  def convert_data_to_transactions(csv_data)
-    csv_data.map do |row|
-      Transaction.new(row)
-    end
+  def convert_data_to_transactions(data)
+    data.map { |row| Transaction.new(row) }
   end
-
 end
 
 

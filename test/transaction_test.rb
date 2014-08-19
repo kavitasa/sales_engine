@@ -3,22 +3,32 @@ require_relative '../lib/transaction'
 
 class TransactionTest < Minitest::Test
 
-  def setup
-    skip
-    @transaction = Transaction.new
+  def row
+    {
+      id: "1",
+      invoice_id: "1",
+      credit_card_number: "4654405418249632",
+      credit_card_expiration_date: nil,
+      result: "success",
+      created_at: "2012-03-27 14:54:09 UTC",
+      updated_at: "2012-03-27 14:54:09 UTC"
+    }
   end
 
-  def test_it_can_load_a_file
-    skip
-    @transaction.load_content("transactions.csv")
-    # assert that the file contains the seven specific headers
+  def test_it_exists
+    assert Transaction
   end
 
-  def test_file_exists
-    skip
-    assert true, @transaction.file_exist?("transactions.csv")
+  def test_it_assigns_the_attributes
+    transaction = Transaction.new(row)
+
+    assert_equal "1", transaction.id
+    assert_equal "1", transaction.invoice_id
+    assert_equal "4654405418249632", transaction.credit_card_number
+    assert_equal nil, transaction.credit_card_expiration_date
+    assert_equal "success", transaction.result
+    assert_equal "2012-03-27 14:54:09 UTC", transaction.created_at
+    assert_equal "2012-03-27 14:54:09 UTC", transaction.updated_at
   end
-
-
 
 end
