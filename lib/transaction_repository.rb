@@ -11,4 +11,8 @@ class TransactionRepository
     @transactions
   end
 
+  def sample
+    all.sample
+  end
+
 end

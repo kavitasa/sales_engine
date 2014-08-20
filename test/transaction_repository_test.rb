@@ -12,7 +12,9 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_random_instance
-    skip
+    transaction_id1 = @transaction_repo.sample.id
+    transaction_id2 = @transaction_repo.sample.id
+    refute_equal transaction_id1, transaction_id2
   end
 
   def test_it_can_find_by_transaction_id
