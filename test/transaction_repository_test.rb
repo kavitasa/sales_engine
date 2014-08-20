@@ -3,8 +3,12 @@ require_relative '../lib/transaction_repository'
 
 class TransactionRepositoryTest < Minitest::Test
 
+  def setup
+    @transaction_repo = TransactionRepository.new("transaction_test_data.csv")
+  end
+
   def test_it_returns_all_instances
-    assert_equal 33, @transactions.all.count
+    assert_equal 33, @transaction_repo.all.count
   end
 
   def test_it_returns_random_instance

@@ -6,7 +6,7 @@ class TransactionParser
 
   attr_reader :file_name
 
-  def initialize(file_name = 'transaction.csv')
+  def initialize(file_name)
     @file_name = file_name
   end
 
