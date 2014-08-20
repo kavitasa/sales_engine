@@ -59,26 +59,30 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal "2012-03-27 14:54:09 UTC", transaction.updated_at
   end
 
-  def test_it_can_find_all_by_transaction_id
-    skip
-    transaction = transaction_repo.find_all_by_transaction_id("1")
-    assert_equal "1", transaction.id
-  end
+  # def test_it_can_find_all_by_transaction_id
+  #   transactions = transaction_repo.find_all_by_transaction_id("1")
+  #   assert_equal "1", transactions.first.id
+  # end
 
-  def test_it_can_find_all_by_invoice_id
-    skip
-  end
+  # def test_it_can_find_all_by_invoice_id
+  #   transactions = transaction_repo.find_all_by_invoice_id("2")
+  #   # assert_equal "2", transaction.invoice_id
+  # end
 
-  def test_it_can_find_all_by_credit_card_number
-    skip
-  end
+  # def test_it_can_find_all_by_credit_card_number
+  #   transactions = transaction_repo.find_all_by_credit_card_number("4354495077693036")
+  # end
 
   def test_it_can_find_all_by_credit_card_expiration_date
     skip
   end
 
-  def test_it_can_find_all_by_result
-    skip
+  def test_it_can_find_all_failed_by_result
+    failed_transactions = transaction_repo.find_all_by_result("failed")
+    successful_transactions = transaction_repo.find_all_by_result("success")
+    p failed_transactions.count
+    p successful_transactions.count
+    p failed_transactions.count + successful_transactions.count
   end
 
   def test_it_can_find_all_by_created_at
