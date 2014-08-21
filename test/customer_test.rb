@@ -32,11 +32,11 @@ class CustomerTest < Minitest::Test
     assert customer.repository
   end
 
-  def test_invoice_returns_instance_of_Invoice
+  def test_invoice_returns_collection_of_Invoice_instances
     sales_engine = SalesEngine.new
     repository = sales_engine.customer_repository
     customer = Customer.new(row, repository)
-    assert customer.invoice.is_a?(Invoice)
+    assert customer.invoices.is_a?(Array)
   end
 
 end
