@@ -21,7 +21,6 @@ class TransactionTest < Minitest::Test
 
   def test_it_assigns_the_attributes
     transaction = Transaction.new(row)
-
     assert_equal "1", transaction.id
     assert_equal "1", transaction.invoice_id
     assert_equal "4654405418249632", transaction.credit_card_number
