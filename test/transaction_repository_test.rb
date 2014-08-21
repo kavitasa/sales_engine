@@ -5,23 +5,28 @@ class TransactionRepositoryTest < Minitest::Test
   attr_reader :transaction_repo
 
   def setup
-    @transaction_repo = TransactionRepository.new
+    test_file_parser = TransactionParser.new('transaction_test_data.csv')
+    @transaction_repo = TransactionRepository.new(test_file_parser)
   end
 
   def test_it_returns_an_array_of_transactions
     assert transaction_repo.transactions.is_a?(Array)
     assert transaction_repo.transactions.first.is_a?(Transaction)
-    assert_equal 5595, transaction_repo.transactions.count
+    assert_equal 33, transaction_repo.transactions.count
   end
 
   def test_it_returns_all_instances
-    assert_equal 5595, transaction_repo.all.count
+    assert_equal 33, transaction_repo.all.count
   end
 
   def test_it_returns_random_instance
-    transaction_id1 = transaction_repo.transactions.sample.id
-    transaction_id2 = transaction_repo.transactions.sample.id
-    refute_equal transaction_id1, transaction_id2
+    # transaction_id1 = transaction_repo.random.id
+    # transaction_id2 = transaction_repo.random.id
+    # refute_equal transaction_id1, transaction_id2
+    number_of_unique_transactions = (1..33).collect do
+      transaction_repo.random.id
+    end.uniq.length
+    assert number_of_unique_transactions > 10
   end
 
   def test_it_can_find_by_transaction_id
@@ -59,38 +64,49 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal "2012-03-27 14:54:09 UTC", transaction.updated_at
   end
 
-  # def test_it_can_find_all_by_transaction_id
-  #   transactions = transaction_repo.find_all_by_transaction_id("1")
-  #   assert_equal "1", transactions.first.id
-  # end
-
-  # def test_it_can_find_all_by_invoice_id
-  #   transactions = transaction_repo.find_all_by_invoice_id("2")
-  #   # assert_equal "2", transaction.invoice_id
-  # end
-
-  # def test_it_can_find_all_by_credit_card_number
-  #   transactions = transaction_repo.find_all_by_credit_card_number("4354495077693036")
-  # end
-
-  def test_it_can_find_all_by_credit_card_expiration_date
-    skip
+  def test_it_can_find_all_by_id
+    transactions = transaction_repo.find_all_by_id("1")
+    assert_equal 1, transactions.count
+    assert_equal "1", transactions.first.id
   end
 
-  def test_it_can_find_all_failed_by_result
+  def test_it_can_find_all_by_invoice_id
+    transactions = transaction_repo.find_all_by_invoice_id("12")
+    assert_equal 3, transactions.count
+    assert_equal "11", transactions[0].id
+    assert_equal "12", transactions[1].id
+    assert_equal "13", transactions[2].id
+  end
+
+  def test_it_can_find_all_by_credit_card_number
+    transactions = transaction_repo.find_all_by_credit_card_number("4993984512460266")
+    assert_equal 2, transactions.count
+    assert_equal "32", transactions[0].id
+    assert_equal "33", transactions[1].id
+  end
+
+  def test_it_can_find_all_by_credit_card_expiration_date
+    transactions = transaction_repo.find_all_by_credit_card_expiration_date(nil)
+    assert_equal 33, transactions.count
+    assert_equal "1", transactions[0].id
+  end
+
+  def test_it_can_find_all_by_result
     failed_transactions = transaction_repo.find_all_by_result("failed")
-    successful_transactions = transaction_repo.find_all_by_result("success")
-    p failed_transactions.count
-    p successful_transactions.count
-    p failed_transactions.count + successful_transactions.count
+    assert_equal 5, failed_transactions.count
+    assert_equal "11", failed_transactions[0].id
   end
 
   def test_it_can_find_all_by_created_at
-    skip
+    transactions = transaction_repo.find_all_by_created_at("2012-03-27 14:54:10 UTC")
+    assert_equal 20, transactions.count
+    assert_equal "3", transactions[0].id
   end
 
   def test_it_can_find_all_by_updated_at
-    skip
+    transactions = transaction_repo.find_all_by_updated_at("2012-03-27 14:54:11 UTC")
+    assert_equal 11, transactions.count
+    assert_equal "23", transactions[0].id
   end
 
 end
