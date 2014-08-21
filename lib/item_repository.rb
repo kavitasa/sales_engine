@@ -2,11 +2,13 @@ require_relative './require_helper'
 require_relative './item_parser'
 
 class ItemRepository
-  attr_reader :items
+  attr_reader :items, :sales_engine
 
-  def initialize(item_parser = ItemParser.new)
+  def initialize(sales_engine)
+    item_parser = ItemParser.new
     parsed_csv = item_parser.parse_data
     @items = convert_csv_to_items(parsed_csv)
+    @sales_engine = sales_engine
   end
 
   def all
@@ -76,6 +78,6 @@ class ItemRepository
   private
 
   def convert_csv_to_items(parsed_csv)
-    parsed_csv.map { |row| Item.new(row) }
+    parsed_csv.map { |row| Item.new(row, self) }
   end
 end

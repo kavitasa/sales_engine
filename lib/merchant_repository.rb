@@ -2,11 +2,12 @@ require_relative './require_helper'
 require_relative './merchant_parser'
 
 class MerchantRepository
-  attr_reader :merchants
+  attr_reader :merchants, :sales_engine
 
-  def initialize(merchant_parser = MerchantParser.new)
-    parsed_csv = merchant_parser.parse_data
-    @merchants = convert_csv_to_merchants(parsed_csv)
+  def initialize(sales_engine, merchant_parser = MerchantParser.new)
+    parsed_csv    = merchant_parser.parse_data
+    @merchants    = convert_csv_to_merchants(parsed_csv)
+    @sales_engine = sales_engine
   end
 
   def all
@@ -52,6 +53,7 @@ class MerchantRepository
   private
 
   def convert_csv_to_merchants(parsed_csv)
-    parsed_csv.map { |row| Merchant .new(row) }
+    parsed_csv.map { |row| Merchant.new(row, self) }
   end
+  
 end
