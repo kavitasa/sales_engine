@@ -1,5 +1,6 @@
 require_relative 'test_helper'
 require_relative '../lib/customer'
+require_relative '../lib/sales_engine'
 
 class CustomerTest < Minitest::Test
 
@@ -18,13 +19,24 @@ class CustomerTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    customer = Customer.new(row)
+    sales_engine = SalesEngine.new
+    repository = sales_engine.customer_repository
+    customer = Customer.new(row, repository)
 
     assert_equal "1", customer.id
     assert_equal "Joey", customer.first_name
     assert_equal "Ondricka", customer.last_name
     assert_equal "2012-03-27 14:54:09 UTC", customer.created_at
     assert_equal "2012-03-27 14:54:09 UTC", customer.updated_at
+
+    assert customer.repository
+  end
+
+  def test_invoice_returns_instance_of_Invoice
+    sales_engine = SalesEngine.new
+    repository = sales_engine.customer_repository
+    customer = Customer.new(row, repository)
+    assert customer.invoice.is_a?(Invoice)
   end
 
 end

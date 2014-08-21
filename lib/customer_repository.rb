@@ -2,11 +2,12 @@ require_relative './require_helper'
 require_relative './customer_parser'
 
 class CustomerRepository
-  attr_reader :customers
+  attr_reader :customers, :sales_engine
 
-  def initialize(customer_parser = CustomerParser.new)
-    parsed_csv = customer_parser.parse_data
-    @customers = convert_csv_to_customers(parsed_csv)
+  def initialize(sales_engine, customer_parser = CustomerParser.new)
+    parsed_csv    = customer_parser.parse_data
+    @customers    = convert_csv_to_customers(parsed_csv)
+    @sales_engine = sales_engine
   end
 
   def all
@@ -60,6 +61,7 @@ class CustomerRepository
   private
 
   def convert_csv_to_customers(parsed_csv)
-    parsed_csv.map { |row| Customer.new(row) }
+    parsed_csv.map { |row| Customer.new(row, self) }
   end
+  
 end
