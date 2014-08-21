@@ -7,13 +7,24 @@ class TransactionParserTest < Minitest::Test
   def setup
     @parser = TransactionParser.new('transaction_test_data.csv')
     @parsed_data = parser.parse_data
-    # @transactions = parser.change_csv_to_transactions
   end
 
-  def test_it_contains_header_row
-    assert parsed_data.header_row?
+  def test_it_parses_data_to_csv_object
+    assert parsed_data.is_a?(CSV)
   end
 
+  def test_it_parses_data_and_builds_correct_header_row
+    assert_equal 33, parsed_data.count
+  end
 
-
+  def test_output_for_first_transaction
+    first_row = parsed_data.readline
+    assert_equal "1", first_row[:id]
+    assert_equal "1", first_row[:invoice_id]
+    assert_equal "4654405418249632", first_row[:credit_card_number]
+    assert_equal nil, first_row[:credit_card_expiration_date]
+    assert_equal "success", first_row[:result]
+    assert_equal "2012-03-27 14:54:09 UTC", first_row[:created_at]
+    assert_equal "2012-03-27 14:54:09 UTC", first_row[:updated_at]
+  end
 end
