@@ -1,5 +1,7 @@
 require_relative 'test_helper'
 require_relative '../lib/transaction'
+require_relative '../lib/sales_engine'
+
 
 class TransactionTest < Minitest::Test
 
@@ -20,7 +22,9 @@ class TransactionTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    transaction = Transaction.new(row)
+    sales_engine = SalesEngine.new
+    repository = sales_engine.transaction_repository
+    transaction = Transaction.new(row, repository)
     assert_equal "1", transaction.id
     assert_equal "1", transaction.invoice_id
     assert_equal "4654405418249632", transaction.credit_card_number
@@ -28,6 +32,14 @@ class TransactionTest < Minitest::Test
     assert_equal "success", transaction.result
     assert_equal "2012-03-27 14:54:09 UTC", transaction.created_at
     assert_equal "2012-03-27 14:54:09 UTC", transaction.updated_at
+    assert transaction.repository
+  end
+
+  def test_invoice_returns_instance_of_Invoice
+    sales_engine = SalesEngine.new
+    repository = sales_engine.transaction_repository
+    transaction = Transaction.new(row, repository)
+    assert transaction.invoice.is_a?(Invoice)
   end
 
 end

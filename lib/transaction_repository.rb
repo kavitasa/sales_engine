@@ -2,11 +2,12 @@ require_relative './require_helper'
 require_relative './transaction_parser'
 
 class TransactionRepository
-  attr_reader :transactions
+  attr_reader :transactions, :sales_engine
 
-  def initialize(transaction_parser = TransactionParser.new)
+  def initialize(sales_engine, transaction_parser = TransactionParser.new)
     parsed_csv = transaction_parser.parse_data
     @transactions = convert_csv_to_transactions(parsed_csv)
+    @sales_engine = sales_engine
   end
 
   def all
@@ -76,6 +77,7 @@ class TransactionRepository
   private
 
   def convert_csv_to_transactions(parsed_csv)
-    parsed_csv.map { |row| Transaction.new(row) }
+    parsed_csv.map { |row| Transaction.new(row, self) }
   end
+
 end
