@@ -26,8 +26,8 @@ class TransactionRepositoryTest < Minitest::Test
     assert number_of_unique_transactions > 10
   end
 
-  def test_it_can_find_by_transaction_id
-    transaction = transaction_repo.find_by_transaction_id("1")
+  def test_it_can_find_by_id
+    transaction = transaction_repo.find_by_id("1")
     assert_equal "1", transaction.id
   end
 

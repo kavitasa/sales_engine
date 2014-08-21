@@ -17,7 +17,7 @@ class TransactionRepository
     @transactions.sample
   end
 
-  def find_by_transaction_id(id)
+  def find_by_id(id)
     transactions.find { |transaction| transaction.id == id }
   end
 
