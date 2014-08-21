@@ -20,9 +20,6 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_random_instance
-    # transaction_id1 = transaction_repo.random.id
-    # transaction_id2 = transaction_repo.random.id
-    # refute_equal transaction_id1, transaction_id2
     number_of_unique_transactions = (1..33).collect do
       transaction_repo.random.id
     end.uniq.length

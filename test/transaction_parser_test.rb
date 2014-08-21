@@ -9,11 +9,11 @@ class TransactionParserTest < Minitest::Test
     @parsed_data = parser.parse_data
   end
 
-  def test_it_parses_data_to_csv_object
+  def test_it_returns_csv_object
     assert parsed_data.is_a?(CSV)
   end
 
-  def test_it_parses_data_and_builds_correct_header_row
+  def test_it_parses_data_to_return_correct_count
     assert_equal 33, parsed_data.count
   end
 
