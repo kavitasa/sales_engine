@@ -33,4 +33,8 @@ class Invoice
     @repository.sales_engine.merchant_repository.find_by_id(self.id)
   end
 
+  def item
+    @repository.sales_engine.invoice_item_repository.find_all_by_id(id).sales_engine.item_repository.find_all_by_id(id)
+  end
+
 end
