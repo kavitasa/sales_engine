@@ -20,7 +20,9 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    item = Item.new(row)
+    sales_engine = SalesEngine.new
+    repository = sales_engine.item_repository
+    item = Item.new(row, repository)
     assert_equal "1", item.id
     assert_equal "Item Qui Esse", item.name
     assert_equal "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.", item.description

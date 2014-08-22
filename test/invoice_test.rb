@@ -19,7 +19,9 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    invoice = Invoice.new(row)
+    sales_engine = SalesEngine.new
+    repository = sales_engine.invoice_repository
+    invoice = Invoice.new(row, repository)
 
     assert_equal "1", invoice.id
     assert_equal "1", invoice.customer_id
