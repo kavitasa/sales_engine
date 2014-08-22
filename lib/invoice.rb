@@ -21,4 +21,9 @@ class Invoice
     @repository.sales_engine.transaction_repository.find_all_by_id(self.id)
   end
 
+  def invoice_item
+    @repository.sales_engine.invoice_item_repository.find_all_by_id(self.id)
+  end
+
+
 end

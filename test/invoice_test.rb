@@ -41,5 +41,13 @@ class InvoiceTest < Minitest::Test
     assert invoice.transaction[0].is_a?(Transaction)
   end
 
+  def test_invoice_items_returns_collection_of_Invoice_Item_instances
+    sales_engine = SalesEngine.new
+    repository = sales_engine.invoice_repository
+    invoice = Invoice.new(row, repository)
+    assert invoice.invoice_item[0].is_a?(InvoiceItem)
+  end
+
+
 
 end
