@@ -4,8 +4,8 @@ require_relative './item_parser'
 class ItemRepository
   attr_reader :items, :sales_engine
 
-  def initialize(sales_engine)
-    item_parser = ItemParser.new
+  def initialize(sales_engine, item_parser = ItemParser.new)
+    # item_parser = ItemParser.new
     parsed_csv = item_parser.parse_data
     @items = convert_csv_to_items(parsed_csv)
     @sales_engine = sales_engine

@@ -1,5 +1,6 @@
 require_relative 'test_helper'
 require_relative '../lib/item'
+require_relative '../lib/sales_engine'
 
 class ItemTest < Minitest::Test
 
@@ -30,6 +31,21 @@ class ItemTest < Minitest::Test
     assert_equal "1", item.merchant_id
     assert_equal "2012-03-27 14:53:59 UTC", item.created_at
     assert_equal "2012-03-27 14:53:59 UTC", item.updated_at
+    assert item.repository
+  end
+
+  def test_merchant_returns_instance_of_Merchant
+    sales_engine = SalesEngine.new
+    repository = sales_engine.item_repository
+    item = Item.new(row, repository)
+    assert item.merchant.is_a?(Merchant)
+  end
+
+  def test_invoice_items_returns_collection_of_InvoiceItem
+    sales_engine = SalesEngine.new
+    repository = sales_engine.item_repository
+    item = Item.new(row, repository)
+    assert item.invoice_items[0].is_a?(InvoiceItem)
   end
 
 end

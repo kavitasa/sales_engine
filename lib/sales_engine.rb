@@ -17,15 +17,13 @@ class SalesEngine
   def initialize
     @merchant_repository     ||= MerchantRepository.new(self)
     @customer_repository     ||= CustomerRepository.new(self)
-    @invoice_repository      = InvoiceRepository.new(self)
-    @invoice_item_repository = InvoiceItemRepository.new
-    @item_repository         = ItemRepository.new(self)
+    @invoice_repository      ||= InvoiceRepository.new(self)
+    @invoice_item_repository ||= InvoiceItemRepository.new
+    @item_repository         ||= ItemRepository.new(self)
     @transaction_repository  ||= TransactionRepository.new(self)
   end
 
   def startup
   end
-
-
 
 end
