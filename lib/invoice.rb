@@ -17,4 +17,8 @@ class Invoice
     @repository  = repository
   end
 
+  def transaction
+    @repository.sales_engine.transaction_repository.find_all_by_id(self.id)
+  end
+
 end

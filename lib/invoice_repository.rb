@@ -4,10 +4,9 @@ require_relative './invoice_parser'
 class InvoiceRepository
   attr_reader :invoices, :sales_engine
 
-  def initialize(sales_engine)
-    invoice_parser = InvoiceParser.new
-    parsed_csv = invoice_parser.parse_data
-    @invoices = convert_csv_to_invoices(parsed_csv)
+  def initialize(sales_engine, invoice_parser = InvoiceParser.new)
+    parsed_csv    = invoice_parser.parse_data
+    @invoices     = convert_csv_to_invoices(parsed_csv)
     @sales_engine = sales_engine
   end
 

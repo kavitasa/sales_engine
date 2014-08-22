@@ -1,5 +1,6 @@
 require_relative 'test_helper'
 require_relative '../lib/invoice'
+require_relative '../lib/sales_engine'
 
 class InvoiceTest < Minitest::Test
 
@@ -29,6 +30,16 @@ class InvoiceTest < Minitest::Test
     assert_equal "shipped", invoice.status
     assert_equal "2012-03-25 09:54:09 UTC", invoice.created_at
     assert_equal "2012-03-25 09:54:09 UTC", invoice.updated_at
+
+    assert invoice.repository
   end
+
+  def test_transactions_returns_collection_of_Transaction_instances
+    sales_engine = SalesEngine.new
+    repository = sales_engine.invoice_repository
+    invoice = Invoice.new(row, repository)
+    assert invoice.transaction[0].is_a?(Transaction)
+  end
+
 
 end

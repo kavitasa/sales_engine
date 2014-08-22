@@ -37,7 +37,7 @@ class MerchantTest < Minitest::Test
     assert merchant.item[0].is_a?(Item)
   end
 
-  def test_invoices_returns_collection_of_Item_instances
+  def test_invoices_returns_collection_of_Invoice_instances
     sales_engine = SalesEngine.new
     repository = sales_engine.merchant_repository
     merchant = Merchant.new(row, repository)
