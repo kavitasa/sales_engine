@@ -55,4 +55,11 @@ class InvoiceTest < Minitest::Test
     assert invoice.customer.is_a?(Customer)
   end
 
+  def test_merchant_returns_instance_of_Merchant
+    sales_engine = SalesEngine.new
+    repository = sales_engine.invoice_repository
+    invoice = Invoice.new(row, repository)
+    assert invoice.merchant.is_a?(Merchant)
+  end
+
 end
