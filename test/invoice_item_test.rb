@@ -1,5 +1,6 @@
 require_relative 'test_helper'
 require_relative '../lib/invoice_item'
+require_relative '../lib/sales_engine'
 
 class InvoiceItemTest < Minitest::Test
 
@@ -20,8 +21,9 @@ class InvoiceItemTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    invoice_item = InvoiceItem.new(row)
-
+    sales_engine = SalesEngine.new
+    repository = sales_engine.invoice_item_repository
+    invoice_item = InvoiceItem.new(row, repository)
     assert_equal "1", invoice_item.id
     assert_equal "539", invoice_item.item_id
     assert_equal "1", invoice_item.invoice_id
@@ -29,6 +31,20 @@ class InvoiceItemTest < Minitest::Test
     assert_equal "13635", invoice_item.unit_price
     assert_equal "2012-03-27 14:54:09 UTC", invoice_item.created_at
     assert_equal "2012-03-27 14:54:09 UTC", invoice_item.updated_at
+  end
+
+  def test_invoice_returns_instance_of_Invoice
+    sales_engine = SalesEngine.new
+    repository = sales_engine.invoice_item_repository
+    invoice_item = InvoiceItem.new(row, repository)
+    assert invoice_item.invoice.is_a?(Invoice)
+  end
+
+  def test_item_returns_instance_of_Item
+    sales_engine = SalesEngine.new
+    repository = sales_engine.invoice_item_repository
+    invoice_item = InvoiceItem.new(row, repository)
+    assert invoice_item.item.is_a?(Item)
   end
 
 end
