@@ -36,7 +36,7 @@ class CustomerTest < Minitest::Test
     sales_engine = SalesEngine.new
     repository = sales_engine.customer_repository
     customer = Customer.new(row, repository)
-    assert customer.invoices.is_a?(Array)
+    assert customer.invoice[0].is_a?(Invoice)
   end
 
 end

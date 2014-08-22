@@ -15,7 +15,7 @@ class Customer
     @repository = repository
   end
 
-  def invoices
+  def invoice
     @repository.sales_engine.invoice_repository.find_all_by_id(self.id)
   end
 

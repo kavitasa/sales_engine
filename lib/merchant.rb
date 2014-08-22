@@ -13,11 +13,11 @@ class Merchant
     @repository = repository
   end
 
-  def items
+  def item
     @repository.sales_engine.item_repository.find_all_by_id(self.id)
   end
 
-  def invoices
+  def invoice
     @repository.sales_engine.invoice_repository.find_all_by_id(self.id)
   end
 
