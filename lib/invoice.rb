@@ -17,4 +17,24 @@ class Invoice
     @repository  = repository
   end
 
+  def transaction
+    @repository.sales_engine.transaction_repository.find_all_by_id(self.id)
+  end
+
+  def invoice_item
+    @repository.sales_engine.invoice_item_repository.find_all_by_id(self.id)
+  end
+
+  def customer
+    @repository.sales_engine.customer_repository.find_by_id(self.id)
+  end
+
+  def merchant
+    @repository.sales_engine.merchant_repository.find_by_id(self.id)
+  end
+
+  def item
+    @repository.sales_engine.invoice_item_repository.find_all_by_id(id).sales_engine.item_repository.find_all_by_id(id)
+  end
+
 end
