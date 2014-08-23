@@ -6,8 +6,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :invoice_item_repo
 
   def setup
-    test_file_parser = InvoiceItemParser.new('invoice_item_test_data.csv')
-    @invoice_item_repo = InvoiceItemRepository.new(test_file_parser)
+    test_file_parser = InvoiceItemParser.new('test/invoice_item_test_data.csv')
+    @invoice_item_repo = InvoiceItemRepository.new(sales_engine = nil, test_file_parser)
   end
 
   def test_it_returns_an_array_of_invoice_items

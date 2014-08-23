@@ -38,14 +38,14 @@ class InvoiceTest < Minitest::Test
     sales_engine = SalesEngine.new
     repository = sales_engine.invoice_repository
     invoice = Invoice.new(row, repository)
-    assert invoice.transaction[0].is_a?(Transaction)
+    assert invoice.transactions[0].is_a?(Transaction)
   end
 
   def test_invoice_items_returns_collection_of_Invoice_Item_instances
     sales_engine = SalesEngine.new
     repository = sales_engine.invoice_repository
     invoice = Invoice.new(row, repository)
-    assert invoice.invoice_item[0].is_a?(InvoiceItem)
+    assert invoice.invoice_items[0].is_a?(InvoiceItem)
   end
 
   def test_customer_returns_instance_of_Customer
@@ -60,6 +60,13 @@ class InvoiceTest < Minitest::Test
     repository = sales_engine.invoice_repository
     invoice = Invoice.new(row, repository)
     assert invoice.merchant.is_a?(Merchant)
+  end
+
+  def test_items_returns_collection_of_Items
+    sales_engine = SalesEngine.new
+    repository = sales_engine.invoice_repository
+    invoice = Invoice.new(row, repository)
+    assert invoice.items[0].is_a?(Item)
   end
 
 end

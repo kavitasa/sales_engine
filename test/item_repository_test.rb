@@ -1,12 +1,13 @@
 require_relative './test_helper'
 require_relative '../lib/item_repository'
+require_relative '../lib/sales_engine'
 
 class ItemRepositoryTest < Minitest::Test
   attr_reader :item_repo
 
   def setup
-    test_file_parser = ItemParser.new('item_test_data.csv')
-    @item_repo = ItemRepository.new(test_file_parser)
+    test_file_parser = ItemParser.new('test/item_test_data.csv')
+    @item_repo = ItemRepository.new(sales_engine = nil, test_file_parser)
   end
 
   def test_it_returns_an_array_of_items

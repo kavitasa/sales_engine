@@ -1,12 +1,13 @@
 require_relative './test_helper'
 require_relative '../lib/customer_repository'
+require_relative '../lib/sales_engine'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repo
 
   def setup
-    test_file_parser = CustomerParser.new('customer_test_data.csv')
-    @customer_repo = CustomerRepository.new(test_file_parser)
+    test_file_parser = CustomerParser.new('test/customer_test_data.csv')
+    @customer_repo = CustomerRepository.new(sales_engine = nil, test_file_parser)
   end
 
   def test_it_returns_an_array_of_customers

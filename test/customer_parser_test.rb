@@ -5,7 +5,7 @@ class CustomerParserTest < Minitest::Test
   attr_reader :parser, :customers, :parsed_data
 
   def setup
-    @parser = CustomerParser.new('customer_test_data.csv')
+    @parser = CustomerParser.new('test/customer_test_data.csv')
     @parsed_data = parser.parse_data
   end
 

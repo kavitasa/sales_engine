@@ -1,12 +1,13 @@
 require_relative './test_helper'
 require_relative '../lib/invoice_repository'
+require_relative '../lib/sales_engine'
 
 class InvoiceRepositoryTest < Minitest::Test
   attr_reader :invoice_repo
 
   def setup
-    test_file_parser = InvoiceParser.new('invoice_test_data.csv')
-    @invoice_repo = InvoiceRepository.new(test_file_parser)
+    test_file_parser = InvoiceParser.new('test/invoice_test_data.csv')
+    @invoice_repo = InvoiceRepository.new(sales_engine = nil, test_file_parser)
   end
 
   def test_it_returns_an_array_of_invoices

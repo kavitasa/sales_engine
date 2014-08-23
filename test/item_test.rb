@@ -3,6 +3,12 @@ require_relative '../lib/item'
 require_relative '../lib/sales_engine'
 
 class ItemTest < Minitest::Test
+  attr_reader :item
+
+  def setup
+    repository = ItemRepository.new(SalesEngine.new)
+    @item = Item.new(row, repository)
+  end
 
   def row
     {
@@ -21,9 +27,6 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    sales_engine = SalesEngine.new
-    repository = sales_engine.item_repository
-    item = Item.new(row, repository)
     assert_equal "1", item.id
     assert_equal "Item Qui Esse", item.name
     assert_equal "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.", item.description
@@ -35,16 +38,10 @@ class ItemTest < Minitest::Test
   end
 
   def test_merchant_returns_instance_of_Merchant
-    sales_engine = SalesEngine.new
-    repository = sales_engine.item_repository
-    item = Item.new(row, repository)
     assert item.merchant.is_a?(Merchant)
   end
 
   def test_invoice_items_returns_collection_of_InvoiceItem
-    sales_engine = SalesEngine.new
-    repository = sales_engine.item_repository
-    item = Item.new(row, repository)
     assert item.invoice_items[0].is_a?(InvoiceItem)
   end
 

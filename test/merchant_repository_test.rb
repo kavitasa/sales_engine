@@ -1,12 +1,13 @@
 require_relative './test_helper'
 require_relative '../lib/merchant_repository'
+require_relative '../lib/sales_engine'
 
 class MerchantRepositoryTest < Minitest::Test
   attr_reader :merchant_repo
 
   def setup
-    test_file_parser = MerchantParser.new('merchant_test_data.csv')
-    @merchant_repo = MerchantRepository.new(test_file_parser)
+    test_file_parser = MerchantParser.new('test/merchant_test_data.csv')
+    @merchant_repo = MerchantRepository.new(sales_engine = nil, test_file_parser)
   end
 
   def test_it_returns_an_array_of_merchant

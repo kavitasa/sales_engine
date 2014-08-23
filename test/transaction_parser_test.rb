@@ -5,7 +5,7 @@ class TransactionParserTest < Minitest::Test
   attr_reader :parser, :transactions, :parsed_data
 
   def setup
-    @parser = TransactionParser.new('transaction_test_data.csv')
+    @parser = TransactionParser.new('test/transaction_test_data.csv')
     @parsed_data = parser.parse_data
   end
 
