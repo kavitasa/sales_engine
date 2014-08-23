@@ -1,7 +1,10 @@
 require_relative './require_helper'
 require_relative './invoice_parser'
+require_relative './finder'
 
 class InvoiceRepository
+  include Finder
+
   attr_reader :invoices, :sales_engine
 
   def initialize(sales_engine, invoice_parser = InvoiceParser.new)
@@ -16,10 +19,6 @@ class InvoiceRepository
 
   def random
     @invoices.sample
-  end
-
-  def find_by_id(id)
-    invoices.find { |invoice| invoice.id == id }
   end
 
   def find_by_customer_id(customer_id)
