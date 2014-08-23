@@ -33,8 +33,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_item_id
-    invoice_item = invoice_item_repo.find_by_item_id("539")
-    assert_equal "539", invoice_item.item_id
+    invoice_item = invoice_item_repo.find_by_item_id("20")
+    assert_equal "20", invoice_item.item_id
   end
 
   def test_it_can_find_by_invoice_id
@@ -69,7 +69,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_item_id
-    invoice_items = invoice_item_repo.find_all_by_item_id("539")
+    invoice_items = invoice_item_repo.find_all_by_item_id("20")
     assert_equal 2, invoice_items.count
     assert_equal "1", invoice_items[0].id
   end

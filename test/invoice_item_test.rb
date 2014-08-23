@@ -6,7 +6,7 @@ class InvoiceItemTest < Minitest::Test
   attr_reader :invoice_item
 
   def setup
-    sales_engine = SalesEngine.new.startup
+    sales_engine = FakeSalesEngine.new
     repository = sales_engine.invoice_item_repository
     @invoice_item = InvoiceItem.new(row, repository)
   end
@@ -14,7 +14,7 @@ class InvoiceItemTest < Minitest::Test
   def row
     {
       id: "1",
-      item_id: "539",
+      item_id: "20",
       invoice_id: "1",
       quantity: "5",
       unit_price: "13635",
@@ -29,7 +29,7 @@ class InvoiceItemTest < Minitest::Test
 
   def test_it_assigns_the_attributes
     assert_equal "1", invoice_item.id
-    assert_equal "539", invoice_item.item_id
+    assert_equal "20", invoice_item.item_id
     assert_equal "1", invoice_item.invoice_id
     assert_equal "5", invoice_item.quantity
     assert_equal "13635", invoice_item.unit_price

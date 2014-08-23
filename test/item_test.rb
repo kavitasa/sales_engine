@@ -6,7 +6,7 @@ class ItemTest < Minitest::Test
   attr_reader :item
 
   def setup
-    sales_engine = SalesEngine.new.startup
+    sales_engine = FakeSalesEngine.new
     repository = sales_engine.item_repository
     @item = Item.new(row, repository)
   end

@@ -7,7 +7,7 @@ class TransactionTest < Minitest::Test
   attr_reader :transaction
 
   def setup
-    sales_engine = SalesEngine.new.startup
+    sales_engine = FakeSalesEngine.new
     repository = sales_engine.transaction_repository
     @transaction = Transaction.new(row, repository)
   end
