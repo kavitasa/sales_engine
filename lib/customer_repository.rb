@@ -58,10 +58,14 @@ class CustomerRepository
     customers.find_all { |customer| customer.updated_at == updated_at }
   end
 
+  def find_all_invoices_by_id(id)
+    sales_engine.find_all_invoices_by_customer_id(id)
+  end
+
   private
 
   def convert_csv_to_customers(parsed_csv)
     parsed_csv.map { |row| Customer.new(row, self) }
   end
-  
+
 end

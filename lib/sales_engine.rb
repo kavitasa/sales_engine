@@ -14,16 +14,18 @@ class SalesEngine
               :item_repository,
               :transaction_repository
 
-  def initialize
+  def startup
     @merchant_repository     ||= MerchantRepository.new(self)
     @customer_repository     ||= CustomerRepository.new(self)
     @invoice_repository      ||= InvoiceRepository.new(self)
     @invoice_item_repository ||= InvoiceItemRepository.new(self)
     @item_repository         ||= ItemRepository.new(self)
     @transaction_repository  ||= TransactionRepository.new(self)
+    self
   end
 
-  def startup
+  def find_all_invoices_by_customer_id(customer_id)
+    invoice_repository.find_all_by_customer_id(customer_id)
   end
 
 end

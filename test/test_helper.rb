@@ -1,3 +1,5 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
+require_relative '../lib/sales_engine'
+require_relative 'fake_sales_engine'

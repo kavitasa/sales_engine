@@ -4,6 +4,13 @@ require_relative '../lib/sales_engine'
 
 
 class TransactionTest < Minitest::Test
+  attr_reader :transaction
+
+  def setup
+    sales_engine = SalesEngine.new.startup
+    repository = sales_engine.transaction_repository
+    @transaction = Transaction.new(row, repository)
+  end
 
   def row
     {
@@ -22,9 +29,6 @@ class TransactionTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    sales_engine = SalesEngine.new
-    repository = sales_engine.transaction_repository
-    transaction = Transaction.new(row, repository)
     assert_equal "1", transaction.id
     assert_equal "1", transaction.invoice_id
     assert_equal "4654405418249632", transaction.credit_card_number
@@ -36,9 +40,6 @@ class TransactionTest < Minitest::Test
   end
 
   def test_invoice_returns_instance_of_Invoice
-    sales_engine = SalesEngine.new
-    repository = sales_engine.transaction_repository
-    transaction = Transaction.new(row, repository)
     assert transaction.invoice.is_a?(Invoice)
   end
 

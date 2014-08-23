@@ -1,13 +1,12 @@
 require_relative './test_helper'
 require_relative '../lib/customer_repository'
-require_relative '../lib/sales_engine'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repo
 
   def setup
     test_file_parser = CustomerParser.new('test/customer_test_data.csv')
-    @customer_repo = CustomerRepository.new(sales_engine = nil, test_file_parser)
+    @customer_repo = CustomerRepository.new(FakeSalesEngine.new, test_file_parser)
   end
 
   def test_it_returns_an_array_of_customers
@@ -80,6 +79,12 @@ class CustomerRepositoryTest < Minitest::Test
     customers = customer_repo.find_all_by_updated_at("2012-03-27 14:54:11 UTC")
     assert_equal 3, customers.count
     assert_equal "8", customers[0].id
+  end
+
+  def test_it_can_find_all_invoices_by_id
+    invoices = customer_repo.find_all_invoices_by_id("1")
+    assert_equal 8, invoices.count
+    assert_equal "1", invoices[0].id
   end
 
 end

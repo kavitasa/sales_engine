@@ -3,6 +3,13 @@ require_relative '../lib/customer'
 require_relative '../lib/sales_engine'
 
 class CustomerTest < Minitest::Test
+  attr_reader :customer
+
+  def setup
+    sales_engine = SalesEngine.new.startup
+    repository = sales_engine.customer_repository
+    @customer = Customer.new(row, repository)
+  end
 
   def row
     {
@@ -19,10 +26,6 @@ class CustomerTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    sales_engine = SalesEngine.new
-    repository = sales_engine.customer_repository
-    customer = Customer.new(row, repository)
-
     assert_equal "1", customer.id
     assert_equal "Joey", customer.first_name
     assert_equal "Ondricka", customer.last_name
@@ -32,11 +35,8 @@ class CustomerTest < Minitest::Test
     assert customer.repository
   end
 
-  def test_invoice_returns_collection_of_Invoice_instances
-    sales_engine = SalesEngine.new
-    repository = sales_engine.customer_repository
-    customer = Customer.new(row, repository)
-    assert customer.invoice[0].is_a?(Invoice)
+  def test_invoices_returns_collection_of_Invoice_instances
+    assert customer.invoices[0].is_a?(Invoice)
   end
 
 end

@@ -3,6 +3,13 @@ require_relative '../lib/invoice'
 require_relative '../lib/sales_engine'
 
 class InvoiceTest < Minitest::Test
+  attr_reader :invoice
+
+  def setup
+    sales_engine = SalesEngine.new.startup
+    repository = sales_engine.invoice_item_repository
+    @invoice = Invoice.new(row, repository)
+  end
 
   def row
     {
@@ -20,52 +27,32 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    sales_engine = SalesEngine.new
-    repository = sales_engine.invoice_repository
-    invoice = Invoice.new(row, repository)
-
     assert_equal "1", invoice.id
     assert_equal "1", invoice.customer_id
     assert_equal "26", invoice.merchant_id
     assert_equal "shipped", invoice.status
     assert_equal "2012-03-25 09:54:09 UTC", invoice.created_at
     assert_equal "2012-03-25 09:54:09 UTC", invoice.updated_at
-
     assert invoice.repository
   end
 
   def test_transactions_returns_collection_of_Transaction_instances
-    sales_engine = SalesEngine.new
-    repository = sales_engine.invoice_repository
-    invoice = Invoice.new(row, repository)
     assert invoice.transactions[0].is_a?(Transaction)
   end
 
   def test_invoice_items_returns_collection_of_Invoice_Item_instances
-    sales_engine = SalesEngine.new
-    repository = sales_engine.invoice_repository
-    invoice = Invoice.new(row, repository)
     assert invoice.invoice_items[0].is_a?(InvoiceItem)
   end
 
   def test_customer_returns_instance_of_Customer
-    sales_engine = SalesEngine.new
-    repository = sales_engine.invoice_repository
-    invoice = Invoice.new(row, repository)
     assert invoice.customer.is_a?(Customer)
   end
 
   def test_merchant_returns_instance_of_Merchant
-    sales_engine = SalesEngine.new
-    repository = sales_engine.invoice_repository
-    invoice = Invoice.new(row, repository)
     assert invoice.merchant.is_a?(Merchant)
   end
 
   def test_items_returns_collection_of_Items
-    sales_engine = SalesEngine.new
-    repository = sales_engine.invoice_repository
-    invoice = Invoice.new(row, repository)
     assert invoice.items[0].is_a?(Item)
   end
 

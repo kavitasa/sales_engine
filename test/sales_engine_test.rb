@@ -18,4 +18,8 @@ class SalesEngineTest < Minitest::Test
     assert engine.transaction_repository
   end
 
+  def test_find_all_invoices_by_customer_id_returns_collection_of_Invoice_instances
+    assert engine.find_all_invoices_by_customer_id("1")[0].is_a?(Invoice)
+  end
+
 end
