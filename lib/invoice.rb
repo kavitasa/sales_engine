@@ -18,25 +18,24 @@ class Invoice
   end
 
   def transactions
-    @repository.sales_engine.transaction_repository.find_all_by_id(self.id)
+    @repository.sales_engine.transaction_repository.find_all_by_id(id)
   end
 
   def invoice_items
-    @repository.sales_engine.invoice_item_repository.find_all_by_id(self.id)
+    @repository.sales_engine.invoice_item_repository.find_all_by_id(id)
   end
 
   def customer
-    @repository.sales_engine.customer_repository.find_by_id(self.id)
+    @repository.sales_engine.customer_repository.find_by_id(id)
   end
 
   def merchant
-    @repository.sales_engine.merchant_repository.find_by_id(self.id)
+    @repository.sales_engine.merchant_repository.find_by_id(id)
   end
 
   def items
     # invoice_items.map {|invoice_item| invoice_item.item}
     invoice_items.map(&:item)
-    # @repository.sales_engine.invoice_item_repository.find_all_by_id(id).sales_engine.item_repository.find_all_by_id(id)
   end
 
 end

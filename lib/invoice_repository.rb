@@ -1,9 +1,11 @@
 require_relative './require_helper'
 require_relative './invoice_parser'
 require_relative './finder'
+require_relative './randomizer'
 
 class InvoiceRepository
   include Finder
+  include Randomizer
 
   attr_reader :invoices, :sales_engine
 
@@ -15,10 +17,6 @@ class InvoiceRepository
 
   def all
     @invoices
-  end
-
-  def random
-    @invoices.sample
   end
 
   def find_by_customer_id(customer_id)
@@ -33,18 +31,6 @@ class InvoiceRepository
     invoices.find { |invoice| invoice.status == status}
   end
 
-  def find_by_created_at(created_at)
-    invoices.find { |invoice| invoice.created_at == created_at }
-  end
-
-  def find_by_updated_at(updated_at)
-    invoices.find { |invoice| invoice.updated_at == updated_at }
-  end
-
-  def find_all_by_id(id)
-    invoices.find_all { |invoice| invoice.id == id }
-  end
-
   def find_all_by_customer_id(customer_id)
     invoices.find_all { |invoice| invoice.customer_id == customer_id }
   end
@@ -57,13 +43,6 @@ class InvoiceRepository
     invoices.find_all { |invoice| invoice.status == status }
   end
 
-  def find_all_by_created_at(created_at)
-    invoices.find_all { |invoice| invoice.created_at == created_at }
-  end
-
-  def find_all_by_updated_at(updated_at)
-    invoices.find_all { |invoice| invoice.updated_at == updated_at }
-  end
 
   private
 

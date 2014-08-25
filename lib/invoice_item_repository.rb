@@ -1,7 +1,11 @@
 require_relative './require_helper'
 require_relative './invoice_item_parser'
+require_relative './randomizer'
 
 class InvoiceItemRepository
+  include Finder
+  include Randomizer
+
   attr_reader :invoice_items, :sales_engine
 
   def initialize(sales_engine, invoice_item_parser = InvoiceItemParser.new)
@@ -12,14 +16,6 @@ class InvoiceItemRepository
 
   def all
     @invoice_items
-  end
-
-  def random
-    @invoice_items.sample
-  end
-
-  def find_by_id(id)
-    invoice_items.find { |invoice_item| invoice_item.id == id }
   end
 
   def find_by_item_id(item_id)
@@ -38,18 +34,6 @@ class InvoiceItemRepository
     invoice_items.find { |invoice_item| invoice_item.unit_price == unit_price}
   end
 
-  def find_by_created_at(created_at)
-    invoice_items.find { |invoice_item| invoice_item.created_at == created_at }
-  end
-
-  def find_by_updated_at(updated_at)
-    invoice_items.find { |invoice_item| invoice_item.updated_at == updated_at }
-  end
-
-  def find_all_by_id(id)
-    invoice_items.find_all { |invoice_item| invoice_item.id == id }
-  end
-
   def find_all_by_item_id(item_id)
     invoice_items.find_all { |invoice_item| invoice_item.item_id == item_id }
   end
@@ -64,14 +48,6 @@ class InvoiceItemRepository
 
   def find_all_by_unit_price(unit_price)
     invoice_items.find_all { |invoice_item| invoice_item.unit_price == unit_price }
-  end
-
-  def find_all_by_created_at(created_at)
-    invoice_items.find_all { |invoice_item| invoice_item.created_at == created_at }
-  end
-
-  def find_all_by_updated_at(updated_at)
-    invoice_items.find_all { |invoice_item| invoice_item.updated_at == updated_at }
   end
 
   private

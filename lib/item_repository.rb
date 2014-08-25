@@ -1,11 +1,14 @@
 require_relative './require_helper'
 require_relative './item_parser'
+require_relative './randomizer'
 
 class ItemRepository
+  include Finder
+  include Randomizer
+
   attr_reader :items, :sales_engine
 
   def initialize(sales_engine, item_parser = ItemParser.new)
-    # item_parser = ItemParser.new
     parsed_csv = item_parser.parse_data
     @items = convert_csv_to_items(parsed_csv)
     @sales_engine = sales_engine
@@ -13,14 +16,6 @@ class ItemRepository
 
   def all
     @items
-  end
-
-  def random
-    @items.sample
-  end
-
-  def find_by_id(id)
-    items.find { |item| item.id == id }
   end
 
   def find_by_name(name)
@@ -39,18 +34,6 @@ class ItemRepository
     items.find { |item| item.merchant_id == merchant_id}
   end
 
-  def find_by_created_at(created_at)
-    items.find { |item| item.created_at == created_at }
-  end
-
-  def find_by_updated_at(updated_at)
-    items.find { |item| item.updated_at == updated_at }
-  end
-
-  def find_all_by_id(id)
-    items.find_all { |item| item.id == id }
-  end
-
   def find_all_by_name(name)
     items.find_all { |item| item.name == name }
   end
@@ -67,13 +50,6 @@ class ItemRepository
     items.find_all { |item| item.merchant_id == merchant_id }
   end
 
-  def find_all_by_created_at(created_at)
-    items.find_all { |item| item.created_at == created_at }
-  end
-
-  def find_all_by_updated_at(updated_at)
-    items.find_all { |item| item.updated_at == updated_at }
-  end
 
   private
 

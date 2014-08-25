@@ -1,9 +1,12 @@
 require_relative './require_helper'
 require_relative './customer_parser'
 require_relative './finder'
+require_relative './randomizer'
+
 
 class CustomerRepository
   include Finder
+  include Randomizer
 
   attr_reader :customers, :sales_engine
 
@@ -15,10 +18,6 @@ class CustomerRepository
 
   def all
     @customers
-  end
-
-  def random
-    @customers.sample
   end
 
   def find_by_first_name(first_name)
@@ -36,6 +35,9 @@ class CustomerRepository
   def find_all_by_last_name(last_name)
     customers.find_all { |customer| customer.last_name == last_name }
   end
+
+
+
 
   def find_all_invoices_by_id(id)
     sales_engine.find_all_invoices_by_customer_id(id)

@@ -1,7 +1,12 @@
 require_relative './require_helper'
 require_relative './transaction_parser'
+require_relative './finder'
+require_relative './randomizer'
 
 class TransactionRepository
+  include Finder
+  include Randomizer
+
   attr_reader :transactions, :sales_engine
 
   def initialize(sales_engine, transaction_parser = TransactionParser.new)
@@ -12,14 +17,6 @@ class TransactionRepository
 
   def all
     @transactions
-  end
-
-  def random
-    @transactions.sample
-  end
-
-  def find_by_id(id)
-    transactions.find { |transaction| transaction.id == id }
   end
 
   def find_by_invoice_id(invoice_id)
@@ -38,18 +35,6 @@ class TransactionRepository
     transactions.find { |transaction| transaction.result == result}
   end
 
-  def find_by_created_at(created_at)
-    transactions.find { |transaction| transaction.created_at == created_at }
-  end
-
-  def find_by_updated_at(updated_at)
-    transactions.find { |transaction| transaction.updated_at == updated_at }
-  end
-
-  def find_all_by_id(id)
-    transactions.find_all { |transaction| transaction.id == id }
-  end
-
   def find_all_by_invoice_id(invoice_id)
     transactions.find_all { |transaction| transaction.invoice_id == invoice_id }
   end
@@ -66,13 +51,7 @@ class TransactionRepository
     transactions.find_all { |transaction| transaction.result == result }
   end
 
-  def find_all_by_created_at(created_at)
-    transactions.find_all { |transaction| transaction.created_at == created_at }
-  end
 
-  def find_all_by_updated_at(updated_at)
-    transactions.find_all { |transaction| transaction.updated_at == updated_at }
-  end
 
   private
 
