@@ -7,8 +7,10 @@ class MerchantRepositoryTest < Minitest::Test
 
   def setup
     test_file_parser = MerchantParser.new('test/merchant_test_data.csv')
-    @merchant_repo = MerchantRepository.new(sales_engine = nil, test_file_parser)
+    @merchant_repo = MerchantRepository.new(FakeSalesEngine.new, test_file_parser)
   end
+
+  #Listing & Searching
 
   def test_it_returns_an_array_of_merchant
     assert merchant_repo.merchants.is_a?(Array)
@@ -69,6 +71,20 @@ class MerchantRepositoryTest < Minitest::Test
     merchants = merchant_repo.find_all_by_updated_at("2012-03-27 14:54:00 UTC")
     assert_equal 12, merchants.count
     assert_equal "10", merchants[0].id
+  end
+
+  #Relationships
+
+  def test_it_can_find_all_items_by_id
+    items = merchant_repo.find_all_items_by_id("1")
+    assert_equal 15, items.count
+    assert_equal "1", items[0].id
+  end
+
+  def test_it_can_find_all_invoices_by_id
+    invoices = merchant_repo.find_all_invoices_by_id("1")
+    assert_equal 1, invoices.count
+    assert_equal "29", invoices[0].id
   end
 
 end

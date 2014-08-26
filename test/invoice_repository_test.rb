@@ -1,14 +1,15 @@
 require_relative './test_helper'
 require_relative '../lib/invoice_repository'
-require_relative '../lib/sales_engine'
 
 class InvoiceRepositoryTest < Minitest::Test
   attr_reader :invoice_repo
 
   def setup
     test_file_parser = InvoiceParser.new('test/invoice_test_data.csv')
-    @invoice_repo = InvoiceRepository.new(sales_engine = nil, test_file_parser)
+    @invoice_repo = InvoiceRepository.new(FakeSalesEngine.new, test_file_parser)
   end
+
+  #Listing & Searching
 
   def test_it_returns_an_array_of_invoices
     assert invoice_repo.invoices.is_a?(Array)
@@ -91,6 +92,24 @@ class InvoiceRepositoryTest < Minitest::Test
     invoices = invoice_repo.find_all_by_updated_at("2012-03-25 09:54:09 UTC")
     assert_equal 1, invoices.count
     assert_equal "1", invoices[0].id
+  end
+
+  #Relationships
+
+  def test_it_can_find_all_transactions_by_id
+    transactions = invoice_repo.find_all_transactions_by_id("1")
+    assert_equal 1, transactions.count
+    assert_equal "1", transactions[0].id
+  end
+
+  def test_it_can_find_invoice_items_by_invoice_id
+    invoice_items = invoice_repo.find_all_invoice_items_by_id("1")
+    assert_equal "1", invoice_items[0].invoice_id
+  end
+
+  def test_it_can_find_customer_by_customer_id
+    customer = invoice_repo.find_customer_by_customer_id("1")
+    assert_equal "1", customer.id
   end
 
 end

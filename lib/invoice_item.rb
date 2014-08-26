@@ -15,15 +15,15 @@ class InvoiceItem
     @unit_price = row[:unit_price]
     @created_at = row[:created_at]
     @updated_at = row[:updated_at]
-    @repository  = repository
+    @repository = repository
   end
 
   def invoice
-    @repository.sales_engine.invoice_repository.find_by_id(invoice_id)
+    @repository.find_invoice_by_invoice_id(invoice_id)
   end
 
   def item
-    @repository.sales_engine.item_repository.find_by_id(item_id)
+    @repository.find_item_by_item_id(item_id)
   end
 
 end

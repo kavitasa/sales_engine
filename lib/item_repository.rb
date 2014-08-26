@@ -1,10 +1,10 @@
 require_relative './require_helper'
 require_relative './item_parser'
-require_relative './randomizer'
+require_relative './helper_methods'
 
 class ItemRepository
   include Finder
-  include Randomizer
+  include HelperMethods
 
   attr_reader :items, :sales_engine
 
@@ -18,6 +18,8 @@ class ItemRepository
     @items
   end
 
+  #Listing & Searching
+
   def find_by_name(name)
     items.find { |item| item.name == name }
   end
@@ -26,12 +28,12 @@ class ItemRepository
     items.find { |item| item.description == description }
   end
 
-  def find_by_unit_price(unit_price)
-    items.find { |item| item.unit_price == unit_price }
-  end
-
   def find_by_merchant_id(merchant_id)
     items.find { |item| item.merchant_id == merchant_id}
+  end
+
+  def find_by_unit_price(unit_price)
+    all.find { |invoice_item| invoice_item.unit_price == unit_price}
   end
 
   def find_all_by_name(name)
@@ -42,14 +44,19 @@ class ItemRepository
     items.find_all { |item| item.description == description }
   end
 
-  def find_all_by_unit_price(unit_price)
-    items.find_all { |item| item.unit_price == unit_price }
-  end
-
   def find_all_by_merchant_id(merchant_id)
     items.find_all { |item| item.merchant_id == merchant_id }
   end
 
+  #Relationships
+
+  def find_merchant_by_merchant_id(merchant_id)
+    sales_engine.find_merchant_by_merchant_id(merchant_id)
+  end
+
+  def find_all_invoice_items_by_id(id)
+    sales_engine.find_all_invoice_items_by_item_id(id)
+  end
 
   private
 

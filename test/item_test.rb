@@ -38,12 +38,12 @@ class ItemTest < Minitest::Test
     assert item.repository
   end
 
+  # def test_invoice_items_returns_collection_of_InvoiceItem
+  #   assert item.invoice_items[0].is_a?(InvoiceItem)
+  # end
+
   def test_merchant_returns_instance_of_Merchant
     assert item.merchant.is_a?(Merchant)
-  end
-
-  def test_invoice_items_returns_collection_of_InvoiceItem
-    assert item.invoice_items[0].is_a?(InvoiceItem)
   end
 
 end

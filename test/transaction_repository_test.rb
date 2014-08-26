@@ -1,13 +1,12 @@
 require_relative './test_helper'
 require_relative '../lib/transaction_repository'
-require_relative '../lib/sales_engine'
 
 class TransactionRepositoryTest < Minitest::Test
   attr_reader :transaction_repo
 
   def setup
     test_file_parser = TransactionParser.new('test/transaction_test_data.csv')
-    @transaction_repo = TransactionRepository.new(sales_engine = nil, test_file_parser)
+    @transaction_repo = TransactionRepository.new(FakeSalesEngine.new, test_file_parser)
   end
 
   def test_it_returns_an_array_of_transactions
@@ -105,6 +104,13 @@ class TransactionRepositoryTest < Minitest::Test
     transactions = transaction_repo.find_all_by_updated_at("2012-03-27 14:54:11 UTC")
     assert_equal 11, transactions.count
     assert_equal "23", transactions[0].id
+  end
+
+  #Relationships
+
+  def test_it_can_find_invoice_by_invoice_id
+    invoice = transaction_repo.find_invoice_by_invoice_id("1")
+    assert_equal "1", invoice.id
   end
 
 end

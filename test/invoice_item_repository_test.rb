@@ -7,8 +7,10 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def setup
     test_file_parser = InvoiceItemParser.new('test/invoice_item_test_data.csv')
-    @invoice_item_repo = InvoiceItemRepository.new(sales_engine = nil, test_file_parser)
+    @invoice_item_repo = InvoiceItemRepository.new(FakeSalesEngine.new, test_file_parser)
   end
+
+  #Listing & Searching
 
   def test_it_returns_an_array_of_invoice_items
     assert invoice_item_repo.invoice_items.is_a?(Array)
@@ -102,6 +104,18 @@ class InvoiceItemRepositoryTest < Minitest::Test
     invoice_items = invoice_item_repo.find_all_by_updated_at("2012-03-27 14:54:10 UTC")
     assert_equal 18, invoice_items.count
     assert_equal "16", invoice_items[0].id
+  end
+
+  #Relationships
+
+  def test_it_can_find_invoice_by_invoice_id
+    invoice = invoice_item_repo.find_invoice_by_invoice_id("1")
+    assert_equal "1", invoice.id
+  end
+
+  def test_it_can_find_item_by_item_id
+    item = invoice_item_repo.find_item_by_item_id("1")
+    assert_equal "1", item.id
   end
 
 end

@@ -45,4 +45,5 @@ class InvoiceItemTest < Minitest::Test
     assert invoice_item.item.is_a?(Item)
   end
 
+
 end

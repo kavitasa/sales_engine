@@ -1,11 +1,11 @@
 require_relative './require_helper'
 require_relative './invoice_parser'
 require_relative './finder'
-require_relative './randomizer'
+require_relative './helper_methods'
 
 class InvoiceRepository
   include Finder
-  include Randomizer
+  include HelperMethods
 
   attr_reader :invoices, :sales_engine
 
@@ -14,6 +14,8 @@ class InvoiceRepository
     @invoices     = convert_csv_to_invoices(parsed_csv)
     @sales_engine = sales_engine
   end
+
+  #Listing & Searching
 
   def all
     @invoices
@@ -43,6 +45,23 @@ class InvoiceRepository
     invoices.find_all { |invoice| invoice.status == status }
   end
 
+  #Relationships
+
+  def find_all_transactions_by_id(id)
+    sales_engine.find_all_transactions_by_invoice_id(id)
+  end
+
+  def find_all_invoice_items_by_id(id)
+    sales_engine.find_all_invoice_items_by_invoice_id(id)
+  end
+
+  def find_customer_by_customer_id(customer_id)
+    sales_engine.find_customer_by_customer_id(customer_id)
+  end
+
+  def find_merchant_by_merchant_id(merchant_id)
+    sales_engine.find_merchant_by_merchant_id(merchant_id)
+  end
 
   private
 

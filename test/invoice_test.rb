@@ -36,6 +36,8 @@ class InvoiceTest < Minitest::Test
     assert invoice.repository
   end
 
+  #Derailed
+
   def test_transactions_returns_collection_of_Transaction_instances
     assert invoice.transactions[0].is_a?(Transaction)
   end
@@ -44,16 +46,16 @@ class InvoiceTest < Minitest::Test
     assert invoice.invoice_items[0].is_a?(InvoiceItem)
   end
 
+  def test_items_returns_collection_of_Items
+    assert invoice.items[0].is_a?(Item)
+  end
+
   def test_customer_returns_instance_of_Customer
     assert invoice.customer.is_a?(Customer)
   end
 
   def test_merchant_returns_instance_of_Merchant
     assert invoice.merchant.is_a?(Merchant)
-  end
-
-  def test_items_returns_collection_of_Items
-    assert invoice.items[0].is_a?(Item)
   end
 
 end

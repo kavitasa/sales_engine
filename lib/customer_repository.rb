@@ -1,12 +1,12 @@
 require_relative './require_helper'
 require_relative './customer_parser'
 require_relative './finder'
-require_relative './randomizer'
+require_relative './helper_methods'
 
 
 class CustomerRepository
   include Finder
-  include Randomizer
+  include HelperMethods
 
   attr_reader :customers, :sales_engine
 
@@ -15,6 +15,8 @@ class CustomerRepository
     @customers    = convert_csv_to_customers(parsed_csv)
     @sales_engine = sales_engine
   end
+
+  #Listing & Searching
 
   def all
     @customers
@@ -37,7 +39,7 @@ class CustomerRepository
   end
 
 
-
+  #Relationships
 
   def find_all_invoices_by_id(id)
     sales_engine.find_all_invoices_by_customer_id(id)

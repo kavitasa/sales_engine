@@ -1,11 +1,11 @@
 require_relative './require_helper'
 require_relative './transaction_parser'
 require_relative './finder'
-require_relative './randomizer'
+require_relative './helper_methods'
 
 class TransactionRepository
   include Finder
-  include Randomizer
+  include HelperMethods
 
   attr_reader :transactions, :sales_engine
 
@@ -51,6 +51,11 @@ class TransactionRepository
     transactions.find_all { |transaction| transaction.result == result }
   end
 
+  #Relationships
+
+  def find_invoice_by_invoice_id(invoice_id)
+    sales_engine.find_invoice_by_invoice_id(invoice_id)
+  end
 
 
   private

@@ -81,6 +81,8 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal "8", customers[0].id
   end
 
+  #Relationships
+
   def test_it_can_find_all_invoices_by_id
     invoices = customer_repo.find_all_invoices_by_id("1")
     assert_equal 8, invoices.count

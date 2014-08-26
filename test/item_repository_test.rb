@@ -7,8 +7,10 @@ class ItemRepositoryTest < Minitest::Test
 
   def setup
     test_file_parser = ItemParser.new('test/item_test_data.csv')
-    @item_repo = ItemRepository.new(sales_engine = nil, test_file_parser)
+    @item_repo = ItemRepository.new(FakeSalesEngine.new, test_file_parser)
   end
+
+  #Listing & Searching
 
   def test_it_returns_an_array_of_items
     assert item_repo.items.is_a?(Array)
@@ -104,5 +106,17 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 33, items.count
     assert_equal "1", items[0].id
   end
+
+  #Relationships
+
+  def test_it_can_find_merchant_by_merchant_id
+    merchant = item_repo.find_merchant_by_merchant_id("1")
+    assert_equal "1", merchant.id
+  end
+
+  # def test_it_can_find_all_invoice_items_by_id
+  #   invoice_items = item_repo.find_all_invoice_items_by_id("1")
+  #   assert_equal "1", invoice_items[0].id
+  # end
 
 end

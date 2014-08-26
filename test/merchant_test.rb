@@ -33,11 +33,11 @@ class MerchantTest < Minitest::Test
   end
 
   def test_items_returns_collection_of_Item_instances
-    assert merchant.item[0].is_a?(Item)
+    assert merchant.items[0].is_a?(Item)
   end
 
   def test_invoices_returns_collection_of_Invoice_instances
-    assert merchant.invoice[0].is_a?(Invoice)
+    assert merchant.invoices[0].is_a?(Invoice)
   end
 
 end
