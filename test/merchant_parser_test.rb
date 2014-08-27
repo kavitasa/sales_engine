@@ -5,7 +5,7 @@ class MerchantParserTest < Minitest::Test
   attr_reader :parser, :merchants, :parsed_data
 
   def setup
-    @parser = MerchantParser.new('test/merchant_test_data.csv')
+    @parser = MerchantParser.new('data/test')
     @parsed_data = parser.parse_data
   end
 

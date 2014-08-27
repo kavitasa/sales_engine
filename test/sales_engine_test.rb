@@ -5,7 +5,7 @@ class SalesEngineTest < Minitest::Test
   attr_reader :engine
 
   def setup
-    @engine = SalesEngine.new
+    @engine = SalesEngine.new('data/test')
     engine.startup
   end
 

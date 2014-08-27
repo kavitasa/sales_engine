@@ -5,7 +5,7 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repo
 
   def setup
-    test_file_parser = CustomerParser.new('test/customer_test_data.csv')
+    test_file_parser = CustomerParser.new('data/test')
     @customer_repo = CustomerRepository.new(FakeSalesEngine.new, test_file_parser)
   end
 

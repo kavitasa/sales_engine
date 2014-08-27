@@ -6,7 +6,7 @@ class MerchantRepositoryTest < Minitest::Test
   attr_reader :merchant_repo
 
   def setup
-    test_file_parser = MerchantParser.new('test/merchant_test_data.csv')
+    test_file_parser = MerchantParser.new('data/test')
     @merchant_repo = MerchantRepository.new(FakeSalesEngine.new, test_file_parser)
   end
 

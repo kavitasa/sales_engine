@@ -6,8 +6,7 @@ class ItemRepositoryTest < Minitest::Test
   attr_reader :item_repo
 
   def setup
-    test_file_parser = ItemParser.new('test/item_test_data.csv')
-    @item_repo = ItemRepository.new(FakeSalesEngine.new, test_file_parser)
+    @item_repo = ItemRepository.new(FakeSalesEngine.new, 'data/test')
   end
 
   #Listing & Searching

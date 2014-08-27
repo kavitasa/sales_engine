@@ -5,7 +5,7 @@ class InvoiceParserTest < Minitest::Test
   attr_reader :parser, :invoices, :parsed_data
 
   def setup
-    @parser = InvoiceParser.new('test/invoice_test_data.csv')
+    @parser = InvoiceParser.new('data/test')
     @parsed_data = parser.parse_data
   end
 

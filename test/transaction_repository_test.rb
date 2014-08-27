@@ -5,8 +5,7 @@ class TransactionRepositoryTest < Minitest::Test
   attr_reader :transaction_repo
 
   def setup
-    test_file_parser = TransactionParser.new('test/transaction_test_data.csv')
-    @transaction_repo = TransactionRepository.new(FakeSalesEngine.new, test_file_parser)
+    @transaction_repo = TransactionRepository.new(FakeSalesEngine.new, 'data/test')
   end
 
   def test_it_returns_an_array_of_transactions

@@ -6,8 +6,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :invoice_item_repo
 
   def setup
-    test_file_parser = InvoiceItemParser.new('test/invoice_item_test_data.csv')
-    @invoice_item_repo = InvoiceItemRepository.new(FakeSalesEngine.new, test_file_parser)
+    @invoice_item_repo = InvoiceItemRepository.new(FakeSalesEngine.new, 'data/test')
   end
 
   #Listing & Searching
