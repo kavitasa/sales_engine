@@ -8,8 +8,8 @@ class ItemRepository
 
   attr_reader :items, :sales_engine
 
-  def initialize(sales_engine, item_parser = ItemParser.new)
-    parsed_csv = item_parser.parse_data
+  def initialize(sales_engine, data_file)
+    parsed_csv = ItemParser.new(data_file).parse_data
     @items = convert_csv_to_items(parsed_csv)
     @sales_engine = sales_engine
   end

@@ -9,8 +9,8 @@ class TransactionRepository
 
   attr_reader :transactions, :sales_engine
 
-  def initialize(sales_engine, transaction_parser = TransactionParser.new)
-    parsed_csv = transaction_parser.parse_data
+  def initialize(sales_engine, data_file)
+    parsed_csv = TransactionParser.new(data_file).parse_data
     @transactions = convert_csv_to_transactions(parsed_csv)
     @sales_engine = sales_engine
   end

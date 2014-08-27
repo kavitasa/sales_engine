@@ -9,8 +9,8 @@ class MerchantRepository
 
   attr_reader :merchants, :sales_engine
 
-  def initialize(sales_engine, merchant_parser = MerchantParser.new)
-    parsed_csv    = merchant_parser.parse_data
+  def initialize(sales_engine, data_file)
+    parsed_csv    = MerchantParser.new(data_file).parse_data
     @merchants    = convert_csv_to_merchants(parsed_csv)
     @sales_engine = sales_engine
   end

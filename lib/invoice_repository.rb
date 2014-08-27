@@ -9,8 +9,8 @@ class InvoiceRepository
 
   attr_reader :invoices, :sales_engine
 
-  def initialize(sales_engine, invoice_parser = InvoiceParser.new)
-    parsed_csv    = invoice_parser.parse_data
+  def initialize(sales_engine, data_file)
+    parsed_csv    = InvoiceParser.new(data_file).parse_data
     @invoices     = convert_csv_to_invoices(parsed_csv)
     @sales_engine = sales_engine
   end

@@ -3,14 +3,13 @@ require_relative 'merchant'
 require 'csv'
 
 class MerchantParser
-  attr_reader :file_name
+  attr_reader :data_file
 
-  def initialize(file_name = 'merchants.csv')
-    @file_name = file_name
+  def initialize(data_file)
+    @data_file = data_file
   end
 
   def parse_data
-    CSV.open("data/" + "#{file_name}", headers: true, header_converters: :symbol)
+    CSV.open("#{data_file}/merchants.csv", headers: true, header_converters: :symbol)
   end
-
 end

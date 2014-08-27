@@ -10,8 +10,8 @@ class CustomerRepository
 
   attr_reader :customers, :sales_engine
 
-  def initialize(sales_engine, customer_parser = CustomerParser.new)
-    parsed_csv    = customer_parser.parse_data
+  def initialize(sales_engine, data_file)
+    parsed_csv    = CustomerParser.new(data_file).parse_data
     @customers    = convert_csv_to_customers(parsed_csv)
     @sales_engine = sales_engine
   end

@@ -1,4 +1,5 @@
 require 'csv'
+require 'bigdecimal'
 require_relative 'merchant_repository'
 require_relative 'customer_repository'
 require_relative 'invoice_repository'
@@ -12,19 +13,20 @@ class SalesEngine
               :invoice_repository,
               :invoice_item_repository,
               :item_repository,
-              :transaction_repository
+              :transaction_repository,
+              :data_file
 
-  # def initialize(data_file)
-  #
-  # end
+  def initialize(data_file = nil)
+    @data_file = data_file
+  end
 
   def startup
-    @merchant_repository     ||= MerchantRepository.new(self)
-    @customer_repository     ||= CustomerRepository.new(self)
-    @invoice_repository      ||= InvoiceRepository.new(self)
-    @invoice_item_repository ||= InvoiceItemRepository.new(self)
-    @item_repository         ||= ItemRepository.new(self)
-    @transaction_repository  ||= TransactionRepository.new(self)
+    @merchant_repository     ||= MerchantRepository.new(   self, data_file)
+    @customer_repository     ||= CustomerRepository.new(   self, data_file)
+    @invoice_repository      ||= InvoiceRepository.new(    self, data_file)
+    @invoice_item_repository ||= InvoiceItemRepository.new(self, data_file)
+    @item_repository         ||= ItemRepository.new(       self, data_file)
+    @transaction_repository  ||= TransactionRepository.new(self, data_file)
     self
   end
 
