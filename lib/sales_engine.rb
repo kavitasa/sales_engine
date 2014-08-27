@@ -79,8 +79,4 @@ class SalesEngine
   def find_all_invoices_by_merchant_id(merchant_id)
     invoice_repository.find_all_by_merchant_id(merchant_id)
   end
-
-  #Transaction
-  #find_invoice_by_invoice_id already implemented for InvoiceItem
-
 end

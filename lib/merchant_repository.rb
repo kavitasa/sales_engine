@@ -37,6 +37,17 @@ class MerchantRepository
     sales_engine.find_all_invoices_by_merchant_id(id)
   end
 
+  #Business Intelligence
+
+  def calculate_total_revenue_per_merchant
+    invoice_revenue = sales_engine.calculate_total_invoice_revenue_per_merchant(id)
+
+  end
+
+  def most_revenue(x)
+    ranked_merchants = merchants.sort_by { |merchant| merchant.revenue }
+    top_merchants = ranked_merchants[0..(x-1)]
+  end
 
   private
 

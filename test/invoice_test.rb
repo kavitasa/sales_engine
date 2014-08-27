@@ -58,4 +58,9 @@ class InvoiceTest < Minitest::Test
     assert invoice.merchant.is_a?(Merchant)
   end
 
+  # Business Intelligence
+
+  def test_it_can_calculate_total_revenue_per_invoice
+    assert_equal BigDecimal.new("2106777"), invoice.total
+  end
 end

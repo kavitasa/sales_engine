@@ -17,12 +17,12 @@ class Merchant
     @repository.find_all_items_by_id(id)
   end
 
-  # def invoice
-  #   @repository.sales_engine.invoice_repository.find_all_by_id(self.id)
-  # end
-
   def invoices
     @repository.find_all_invoices_by_id(id)
   end
 
+  def revenue
+    start_value = BigDecimal.new("0")
+    invoices.map(&:total).reduce(start_value, :+)
+  end
 end

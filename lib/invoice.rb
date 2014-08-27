@@ -34,12 +34,13 @@ class Invoice
     @repository.find_customer_by_customer_id(customer_id)
   end
 
-  # def merchant
-  #   @repository.sales_engine.merchant_repository.find_by_id(id)
-  # end
-
   def merchant
     @repository.find_merchant_by_merchant_id(merchant_id)
+  end
+
+  def total
+    start_value = BigDecimal.new("0")
+    invoice_items.map(&:total_price).reduce(start_value, :+)
   end
 
 end

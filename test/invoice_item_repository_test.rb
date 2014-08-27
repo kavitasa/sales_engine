@@ -49,8 +49,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_unit_price
-    invoice_item = invoice_item_repo.find_by_unit_price(BigDecimal.new("136.35"))
-    assert_equal BigDecimal.new("136.35"), invoice_item.unit_price
+    invoice_item = invoice_item_repo.find_by_unit_price(BigDecimal.new("13635"))
+    assert_equal BigDecimal.new("13635"), invoice_item.unit_price
   end
 
   def test_it_can_find_by_created_at
@@ -88,7 +88,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_unit_price
-    invoice_items = invoice_item_repo.find_all_by_unit_price(BigDecimal.new("136.35"))
+    invoice_items = invoice_item_repo.find_all_by_unit_price(BigDecimal.new("13635"))
     assert_equal 2, invoice_items.count
     assert_equal 1, invoice_items[0].id
   end
@@ -115,6 +115,12 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_it_can_find_item_by_item_id
     item = invoice_item_repo.find_item_by_item_id(1)
     assert_equal 1, item.id
+  end
+
+  #Business Intelligence
+
+  def test_it_can_calculate_total_price_per_invoice_item
+
   end
 
 end

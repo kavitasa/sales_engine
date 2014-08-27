@@ -82,8 +82,16 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_it_can_find_all_invoices_by_id
     invoices = merchant_repo.find_all_invoices_by_id(1)
-    assert_equal 1, invoices.count
-    assert_equal 29, invoices[0].id
+    assert_equal 2, invoices.count
+    assert_equal 12, invoices[0].id
+  end
+
+  #Business Intelligence
+
+  def test_it_can_return_top_x_merchant_instances_ranked_by_total_revenue
+    merchants = merchant_repo.most_revenue(10)
+    assert_equal 10, merchants.count
+    assert merchants[0].revenue >= merchants[1].revenue
   end
 
 end

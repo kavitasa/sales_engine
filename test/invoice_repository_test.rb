@@ -110,5 +110,4 @@ class InvoiceRepositoryTest < Minitest::Test
     customer = invoice_repo.find_customer_by_customer_id(1)
     assert_equal 1, customer.id
   end
-
 end
