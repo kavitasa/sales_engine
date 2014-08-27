@@ -6,8 +6,7 @@ class MerchantRepositoryTest < Minitest::Test
   attr_reader :merchant_repo
 
   def setup
-    test_file_parser = MerchantParser.new('data/test')
-    @merchant_repo = MerchantRepository.new(FakeSalesEngine.new, test_file_parser)
+    @merchant_repo = MerchantRepository.new(FakeSalesEngine.new, data_file = 'data/test')
   end
 
   #Listing & Searching
@@ -30,8 +29,8 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_id
-    merchant = merchant_repo.find_by_id("1")
-    assert_equal "1", merchant.id
+    merchant = merchant_repo.find_by_id(1)
+    assert_equal 1, merchant.id
   end
 
   def test_it_can_find_by_name
@@ -50,41 +49,41 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_id
-    merchants = merchant_repo.find_all_by_id("1")
+    merchants = merchant_repo.find_all_by_id(1)
     assert_equal 1, merchants.count
-    assert_equal "1", merchants.first.id
+    assert_equal 1, merchants.first.id
   end
 
   def test_it_can_find_all_by_name
     merchants = merchant_repo.find_all_by_name("Schroeder-Jerde")
     assert_equal 1, merchants.count
-    assert_equal "1", merchants[0].id
+    assert_equal 1, merchants[0].id
   end
 
   def test_it_can_find_all_by_created_at
     merchants = merchant_repo.find_all_by_created_at("2012-03-27 14:54:00 UTC")
     assert_equal 12, merchants.count
-    assert_equal "10", merchants[0].id
+    assert_equal 10, merchants[0].id
   end
 
   def test_it_can_find_all_by_updated_at
     merchants = merchant_repo.find_all_by_updated_at("2012-03-27 14:54:00 UTC")
     assert_equal 12, merchants.count
-    assert_equal "10", merchants[0].id
+    assert_equal 10, merchants[0].id
   end
 
   #Relationships
 
   def test_it_can_find_all_items_by_id
-    items = merchant_repo.find_all_items_by_id("1")
+    items = merchant_repo.find_all_items_by_id(1)
     assert_equal 15, items.count
-    assert_equal "1", items[0].id
+    assert_equal 1, items[0].id
   end
 
   def test_it_can_find_all_invoices_by_id
-    invoices = merchant_repo.find_all_invoices_by_id("1")
+    invoices = merchant_repo.find_all_invoices_by_id(1)
     assert_equal 1, invoices.count
-    assert_equal "29", invoices[0].id
+    assert_equal 29, invoices[0].id
   end
 
 end

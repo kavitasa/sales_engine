@@ -28,18 +28,18 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_id
-    invoice = invoice_repo.find_by_id("1")
-    assert_equal "1", invoice.id
+    invoice = invoice_repo.find_by_id(1)
+    assert_equal 1, invoice.id
   end
 
   def test_it_can_find_by_customer_id
-    invoice = invoice_repo.find_by_customer_id("1")
-    assert_equal "1", invoice.customer_id
+    invoice = invoice_repo.find_by_customer_id(1)
+    assert_equal 1, invoice.customer_id
   end
 
   def test_it_can_find_by_merchant_id
-    invoice = invoice_repo.find_by_merchant_id("26")
-    assert_equal "26", invoice.merchant_id
+    invoice = invoice_repo.find_by_merchant_id(26)
+    assert_equal 26, invoice.merchant_id
   end
 
   def test_it_can_find_by_status
@@ -58,57 +58,57 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_id
-    invoices = invoice_repo.find_all_by_id("1")
+    invoices = invoice_repo.find_all_by_id(1)
     assert_equal 1, invoices.count
-    assert_equal "1", invoices.first.id
+    assert_equal 1, invoices.first.id
   end
 
   def test_it_can_find_all_by_customer_id
-    invoices = invoice_repo.find_all_by_customer_id("1")
+    invoices = invoice_repo.find_all_by_customer_id(1)
     assert_equal 8, invoices.count
-    assert_equal "1", invoices[0].id
+    assert_equal 1, invoices[0].id
   end
 
   def test_it_can_find_all_by_merchant_id
-    invoices = invoice_repo.find_all_by_merchant_id("26")
+    invoices = invoice_repo.find_all_by_merchant_id(26)
     assert_equal 2, invoices.count
-    assert_equal "1", invoices[0].id
+    assert_equal 1, invoices[0].id
   end
 
   def test_it_can_find_all_by_status
     shipped_invoices = invoice_repo.find_all_by_status("shipped")
     assert_equal 33, shipped_invoices.count
-    assert_equal "1", shipped_invoices[0].id
+    assert_equal 1, shipped_invoices[0].id
   end
 
   def test_it_can_find_all_by_created_at
     invoices = invoice_repo.find_all_by_created_at("2012-03-25 09:54:09 UTC")
     assert_equal 1, invoices.count
-    assert_equal "1", invoices[0].id
+    assert_equal 1, invoices[0].id
   end
 
   def test_it_can_find_all_by_updated_at
     invoices = invoice_repo.find_all_by_updated_at("2012-03-25 09:54:09 UTC")
     assert_equal 1, invoices.count
-    assert_equal "1", invoices[0].id
+    assert_equal 1, invoices[0].id
   end
 
   #Relationships
 
   def test_it_can_find_all_transactions_by_id
-    transactions = invoice_repo.find_all_transactions_by_id("1")
+    transactions = invoice_repo.find_all_transactions_by_id(1)
     assert_equal 1, transactions.count
-    assert_equal "1", transactions[0].id
+    assert_equal 1, transactions[0].id
   end
 
   def test_it_can_find_invoice_items_by_invoice_id
-    invoice_items = invoice_repo.find_all_invoice_items_by_id("1")
-    assert_equal "1", invoice_items[0].invoice_id
+    invoice_items = invoice_repo.find_all_invoice_items_by_id(1)
+    assert_equal 1, invoice_items[0].invoice_id
   end
 
   def test_it_can_find_customer_by_customer_id
-    customer = invoice_repo.find_customer_by_customer_id("1")
-    assert_equal "1", customer.id
+    customer = invoice_repo.find_customer_by_customer_id(1)
+    assert_equal 1, customer.id
   end
 
 end

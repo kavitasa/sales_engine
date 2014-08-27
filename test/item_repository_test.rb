@@ -29,8 +29,8 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_id
-    item = item_repo.find_by_id("1")
-    assert_equal "1", item.id
+    item = item_repo.find_by_id(1)
+    assert_equal 1, item.id
   end
 
   def test_it_can_find_by_name
@@ -44,13 +44,13 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_unit_price
-    item = item_repo.find_by_unit_price("75107")
-    assert_equal "75107", item.unit_price
+    item = item_repo.find_by_unit_price("751.07")
+    assert_equal "751.07", item.unit_price
   end
 
   def test_it_can_find_by_merchant_id
-    item = item_repo.find_by_merchant_id("1")
-    assert_equal "1", item.merchant_id
+    item = item_repo.find_by_merchant_id(1)
+    assert_equal 1, item.merchant_id
   end
 
   def test_it_can_find_by_created_at
@@ -64,53 +64,53 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_id
-    items = item_repo.find_all_by_id("1")
+    items = item_repo.find_all_by_id(1)
     assert_equal 1, items.count
-    assert_equal "1", items.first.id
+    assert_equal 1, items.first.id
   end
 
   def test_it_can_find_all_by_name
     items = item_repo.find_all_by_name("Item Expedita Fuga")
     assert_equal 2, items.count
-    assert_equal "3", items[0].id
-    assert_equal "7", items[1].id
+    assert_equal 3, items[0].id
+    assert_equal 7, items[1].id
   end
 
   def test_it_can_find_all_by_description
     items = item_repo.find_all_by_description("Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.")
     assert_equal 1, items.count
-    assert_equal "1", items[0].id
+    assert_equal 1, items[0].id
   end
 
   def test_it_can_find_all_by_unit_price
-    items = item_repo.find_all_by_unit_price("75107")
+    items = item_repo.find_all_by_unit_price("751.07")
     assert_equal 1, items.count
-    assert_equal "1", items[0].id
+    assert_equal 1, items[0].id
   end
 
   def test_it_can_find_all_by_merchant_id
-    items = item_repo.find_all_by_merchant_id("1")
+    items = item_repo.find_all_by_merchant_id(1)
     assert_equal 15, items.count
-    assert_equal "1", items[0].id
+    assert_equal 1, items[0].id
   end
 
   def test_it_can_find_all_by_created_at
     items = item_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC")
     assert_equal 33, items.count
-    assert_equal "1", items[0].id
+    assert_equal 1, items[0].id
   end
 
   def test_it_can_find_all_by_updated_at
     items = item_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
     assert_equal 33, items.count
-    assert_equal "1", items[0].id
+    assert_equal 1, items[0].id
   end
 
   #Relationships
 
   def test_it_can_find_merchant_by_merchant_id
-    merchant = item_repo.find_merchant_by_merchant_id("1")
-    assert_equal "1", merchant.id
+    merchant = item_repo.find_merchant_by_merchant_id(1)
+    assert_equal 1, merchant.id
   end
 
   # def test_it_can_find_all_invoice_items_by_id

@@ -5,8 +5,7 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repo
 
   def setup
-    test_file_parser = CustomerParser.new('data/test')
-    @customer_repo = CustomerRepository.new(FakeSalesEngine.new, test_file_parser)
+    @customer_repo = CustomerRepository.new(FakeSalesEngine.new, 'data/test')
   end
 
   def test_it_returns_an_array_of_customers
@@ -27,8 +26,8 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_id
-    customer = customer_repo.find_by_id("1")
-    assert_equal "1", customer.id
+    customer = customer_repo.find_by_id(1)
+    assert_equal 1, customer.id
   end
 
   def test_it_can_find_by_first_name
@@ -52,41 +51,41 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_id
-    customers = customer_repo.find_all_by_id("1")
+    customers = customer_repo.find_all_by_id(1)
     assert_equal 1, customers.count
-    assert_equal "1", customers.first.id
+    assert_equal 1, customers.first.id
   end
 
   def test_it_can_find_all_by_first_name
     customers = customer_repo.find_all_by_first_name("Joey")
     assert_equal 2, customers.count
-    assert_equal "1", customers[0].id
+    assert_equal 1, customers[0].id
   end
 
   def test_it_can_find_all_by_last_name
     customers = customer_repo.find_all_by_last_name("Ondricka")
     assert_equal 2, customers.count
-    assert_equal "1", customers[0].id
+    assert_equal 1, customers[0].id
   end
 
   def test_it_can_find_all_by_created_at
     customers = customer_repo.find_all_by_created_at("2012-03-27 14:54:10 UTC")
     assert_equal 6, customers.count
-    assert_equal "2", customers[0].id
+    assert_equal 2, customers[0].id
   end
 
   def test_it_can_find_all_by_updated_at
     customers = customer_repo.find_all_by_updated_at("2012-03-27 14:54:11 UTC")
     assert_equal 3, customers.count
-    assert_equal "8", customers[0].id
+    assert_equal 8, customers[0].id
   end
 
   #Relationships
 
   def test_it_can_find_all_invoices_by_id
-    invoices = customer_repo.find_all_invoices_by_id("1")
+    invoices = customer_repo.find_all_invoices_by_id(1)
     assert_equal 8, invoices.count
-    assert_equal "1", invoices[0].id
+    assert_equal 1, invoices[0].id
   end
 
 end

@@ -14,8 +14,8 @@ class TransactionTest < Minitest::Test
 
   def row
     {
-      id: "1",
-      invoice_id: "1",
+      id: 1,
+      invoice_id: 1,
       credit_card_number: "4654405418249632",
       credit_card_expiration_date: nil,
       result: "success",
@@ -29,8 +29,8 @@ class TransactionTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    assert_equal "1", transaction.id
-    assert_equal "1", transaction.invoice_id
+    assert_equal 1, transaction.id
+    assert_equal 1, transaction.invoice_id
     assert_equal "4654405418249632", transaction.credit_card_number
     assert_equal nil, transaction.credit_card_expiration_date
     assert_equal "success", transaction.result

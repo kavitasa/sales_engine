@@ -13,7 +13,7 @@ class MerchantTest < Minitest::Test
 
   def row
     {
-      id: "1",
+      id: 1,
       name: "Schroeder-Jerde",
       created_at: "2012-03-27 14:53:59 UTC",
       updated_at: "2012-03-27 14:53:59 UTC"
@@ -25,7 +25,7 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_assigns_the_attributes
-    assert_equal "1", merchant.id
+    assert_equal 1, merchant.id
     assert_equal "Schroeder-Jerde", merchant.name
     assert_equal "2012-03-27 14:53:59 UTC", merchant.created_at
     assert_equal "2012-03-27 14:53:59 UTC", merchant.updated_at

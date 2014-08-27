@@ -26,13 +26,13 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_id
-    transaction = transaction_repo.find_by_id("1")
-    assert_equal "1", transaction.id
+    transaction = transaction_repo.find_by_id(1)
+    assert_equal 1, transaction.id
   end
 
   def test_it_can_find_by_invoice_id
-    transaction = transaction_repo.find_by_invoice_id("2")
-    assert_equal "2", transaction.invoice_id
+    transaction = transaction_repo.find_by_invoice_id(2)
+    assert_equal 2, transaction.invoice_id
   end
 
   def test_it_can_find_by_credit_card_number
@@ -61,55 +61,55 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_id
-    transactions = transaction_repo.find_all_by_id("1")
+    transactions = transaction_repo.find_all_by_id(1)
     assert_equal 1, transactions.count
-    assert_equal "1", transactions.first.id
+    assert_equal 1, transactions.first.id
   end
 
   def test_it_can_find_all_by_invoice_id
-    transactions = transaction_repo.find_all_by_invoice_id("12")
+    transactions = transaction_repo.find_all_by_invoice_id(12)
     assert_equal 3, transactions.count
-    assert_equal "11", transactions[0].id
-    assert_equal "12", transactions[1].id
-    assert_equal "13", transactions[2].id
+    assert_equal 11, transactions[0].id
+    assert_equal 12, transactions[1].id
+    assert_equal 13, transactions[2].id
   end
 
   def test_it_can_find_all_by_credit_card_number
     transactions = transaction_repo.find_all_by_credit_card_number("4993984512460266")
     assert_equal 2, transactions.count
-    assert_equal "32", transactions[0].id
-    assert_equal "33", transactions[1].id
+    assert_equal 32, transactions[0].id
+    assert_equal 33, transactions[1].id
   end
 
   def test_it_can_find_all_by_credit_card_expiration_date
     transactions = transaction_repo.find_all_by_credit_card_expiration_date(nil)
     assert_equal 33, transactions.count
-    assert_equal "1", transactions[0].id
+    assert_equal 1, transactions[0].id
   end
 
   def test_it_can_find_all_by_result
     failed_transactions = transaction_repo.find_all_by_result("failed")
     assert_equal 5, failed_transactions.count
-    assert_equal "11", failed_transactions[0].id
+    assert_equal 11, failed_transactions[0].id
   end
 
   def test_it_can_find_all_by_created_at
     transactions = transaction_repo.find_all_by_created_at("2012-03-27 14:54:10 UTC")
     assert_equal 20, transactions.count
-    assert_equal "3", transactions[0].id
+    assert_equal 3, transactions[0].id
   end
 
   def test_it_can_find_all_by_updated_at
     transactions = transaction_repo.find_all_by_updated_at("2012-03-27 14:54:11 UTC")
     assert_equal 11, transactions.count
-    assert_equal "23", transactions[0].id
+    assert_equal 23, transactions[0].id
   end
 
   #Relationships
 
   def test_it_can_find_invoice_by_invoice_id
-    invoice = transaction_repo.find_invoice_by_invoice_id("1")
-    assert_equal "1", invoice.id
+    invoice = transaction_repo.find_invoice_by_invoice_id(1)
+    assert_equal 1, invoice.id
   end
 
 end
