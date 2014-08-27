@@ -23,10 +23,6 @@ class Item
     @repository.find_merchant_by_merchant_id(merchant_id)
   end
 
-  # def invoice_items
-  #   @repository.sales_engine.invoice_item_repository.find_all_by_id(id)
-  # end
-
   def invoice_items
     @repository.find_all_invoice_items_by_id(id)
   end

@@ -20,7 +20,7 @@ class InvoiceItemParserTest < Minitest::Test
   def test_output_for_first_invoice_item
     first_row = parsed_data.readline
     assert_equal "1", first_row[:id]
-    assert_equal "20", first_row[:item_id]
+    assert_equal "1", first_row[:item_id]
     assert_equal "1", first_row[:invoice_id]
     assert_equal "5", first_row[:quantity]
     assert_equal "13635", first_row[:unit_price]

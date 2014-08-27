@@ -44,8 +44,8 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_by_unit_price
-    item = item_repo.find_by_unit_price("751.07")
-    assert_equal "751.07", item.unit_price
+    item = item_repo.find_by_unit_price(BigDecimal.new("751.07"))
+    assert_equal BigDecimal.new("751.07"), item.unit_price
   end
 
   def test_it_can_find_by_merchant_id
@@ -83,7 +83,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_can_find_all_by_unit_price
-    items = item_repo.find_all_by_unit_price("751.07")
+    items = item_repo.find_all_by_unit_price(BigDecimal.new("751.07"))
     assert_equal 1, items.count
     assert_equal 1, items[0].id
   end
@@ -113,9 +113,9 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 1, merchant.id
   end
 
-  # def test_it_can_find_all_invoice_items_by_id
-  #   invoice_items = item_repo.find_all_invoice_items_by_id("1")
-  #   assert_equal "1", invoice_items[0].id
-  # end
+  def test_it_can_find_all_invoice_items_by_id
+    invoice_items = item_repo.find_all_invoice_items_by_id(1)
+    assert_equal 1, invoice_items[0].id
+  end
 
 end
