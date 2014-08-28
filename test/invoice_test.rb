@@ -61,7 +61,7 @@ class InvoiceTest < Minitest::Test
   # Business Intelligence
 
   def test_it_can_calculate_total_revenue
-    assert_equal BigDecimal.new("2106777"), invoice.total_price
+    assert_equal BigDecimal.new("21067.77"), invoice.total_price
   end
 
   def test_it_can_calculate_total_items

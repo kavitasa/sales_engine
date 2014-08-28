@@ -32,7 +32,7 @@ class InvoiceItemTest < Minitest::Test
     assert_equal 20, invoice_item.item_id
     assert_equal 1, invoice_item.invoice_id
     assert_equal 5, invoice_item.quantity
-    assert_equal BigDecimal.new("13635"), invoice_item.unit_price
+    assert_equal BigDecimal.new("136.35"), invoice_item.unit_price
     assert_equal "2012-03-27 14:54:09 UTC", invoice_item.created_at
     assert_equal "2012-03-27 14:54:09 UTC", invoice_item.updated_at
   end
@@ -48,7 +48,7 @@ class InvoiceItemTest < Minitest::Test
   # Business Intelligence
 
   def test_it_returns_total_price
-    assert_equal BigDecimal.new("13635") * 5, invoice_item.total_price
+    assert_equal BigDecimal.new("136.35") * 5, invoice_item.total_price
   end
 
   def test_it_returns_total_items

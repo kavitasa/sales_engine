@@ -43,7 +43,7 @@ class MerchantTest < Minitest::Test
   # Business Intelligence
 
   def test_it_can_calculate_total_revenue
-    assert_equal BigDecimal.new("249657"), merchant.revenue
+    assert_equal BigDecimal.new("2496.57"), merchant.revenue
   end
 
   def test_it_can_calculate_total_items
@@ -51,6 +51,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_can_calculate_revenue_on_a_date_per_merchant
-    assert_equal BigDecimal.new("140577"), merchant.revenue(Date.parse("2012-03-25"))
+    assert_equal BigDecimal.new("1405.77"), merchant.revenue(Date.parse("2012-03-25"))
   end
 end
