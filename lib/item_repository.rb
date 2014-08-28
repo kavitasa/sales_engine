@@ -1,6 +1,5 @@
 require_relative './require_helper'
 require_relative './item_parser'
-require_relative './helper_methods'
 
 class ItemRepository
   include Finder

@@ -18,8 +18,6 @@ class InvoiceItem
     @repository = repository
   end
 
-  #"%0.2f" % result
-
   def invoice
     @repository.find_invoice_by_invoice_id(invoice_id)
   end

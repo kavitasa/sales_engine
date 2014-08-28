@@ -4,7 +4,7 @@ module HelperMethods
     all.sample
   end
 
-    def inspect
+  def inspect
     "#<#{self.class} #{@all.size} rows>"
   end
 

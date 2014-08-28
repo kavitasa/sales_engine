@@ -1,4 +1,3 @@
-# require_relative './require_helper'
 require_relative 'item'
 require 'csv'
 

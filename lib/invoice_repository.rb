@@ -1,7 +1,6 @@
 require_relative './require_helper'
 require_relative './invoice_parser'
-require_relative './finder'
-require_relative './helper_methods'
+
 
 class InvoiceRepository
   include Finder

@@ -1,7 +1,5 @@
 require_relative './require_helper'
 require_relative './merchant_parser'
-require_relative './finder'
-require_relative './helper_methods'
 
 class MerchantRepository
   include Finder

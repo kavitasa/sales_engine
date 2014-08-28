@@ -19,10 +19,6 @@ class Transaction
     @repository                  = repository
   end
 
-  # def invoice
-  #   @repository.sales_engine.invoice_repository.find_by_id(invoice_id)
-  # end
-
   def invoice
     @repository.find_invoice_by_invoice_id(invoice_id)
   end

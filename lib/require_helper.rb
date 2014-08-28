@@ -1,3 +1,2 @@
-# require 'csv'
-# require_relative 'merchant'
-# require_relative 'merchant_repository'
+require_relative './finder'
+require_relative './helper_methods'
