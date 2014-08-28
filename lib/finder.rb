@@ -12,8 +12,6 @@ module Finder
     all.find { |repository_item| repository_item.updated_at == updated_at }
   end
 
-
-
   def find_all_by_id(id)
     all.find_all { |repository_item| repository_item.id == id }
   end

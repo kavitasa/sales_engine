@@ -12,7 +12,7 @@ class Invoice
     @customer_id = row[:customer_id].to_i
     @merchant_id = row[:merchant_id].to_i
     @status      = row[:status]
-    @created_at  = row[:created_at]
+    @created_at  = parse_created_at(row[:created_at])
     @updated_at  = row[:updated_at]
     @repository  = repository
   end
@@ -38,9 +38,19 @@ class Invoice
     @repository.find_merchant_by_merchant_id(merchant_id)
   end
 
-  def total
+  def total_price_per_invoice
     start_value = BigDecimal.new("0")
-    invoice_items.map(&:total_price).reduce(start_value, :+)
+    invoice_items.map(&:total_price_per_invoice_item).reduce(start_value, :+)
+  end
+
+  def total_items_per_invoice
+    invoice_items.map(&:total_items_per_invoice_item).reduce(0, :+)
+  end
+
+  private
+
+  def parse_created_at(created_at)
+    Date.parse(created_at.split(' ')[0])
   end
 
 end

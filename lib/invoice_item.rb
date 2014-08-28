@@ -26,8 +26,12 @@ class InvoiceItem
     @repository.find_item_by_item_id(item_id)
   end
 
-  def total_price
+  def total_price_per_invoice_item
     unit_price * quantity
+  end
+
+  def total_items_per_invoice_item
+    quantity
   end
 
 end

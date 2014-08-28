@@ -101,7 +101,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_it_can_find_all_by_updated_at
     invoice_items = invoice_item_repo.find_all_by_updated_at("2012-03-27 14:54:10 UTC")
-    assert_equal 18, invoice_items.count
+    assert_equal 16, invoice_items.count
     assert_equal 16, invoice_items[0].id
   end
 

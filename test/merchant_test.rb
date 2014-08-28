@@ -27,7 +27,7 @@ class MerchantTest < Minitest::Test
   def test_it_assigns_the_attributes
     assert_equal 1, merchant.id
     assert_equal "Schroeder-Jerde", merchant.name
-    assert_equal "2012-03-27 14:53:59 UTC", merchant.created_at
+    assert_equal Date.parse("2012-03-27"), merchant.created_at
     assert_equal "2012-03-27 14:53:59 UTC", merchant.updated_at
     assert merchant.repository
   end
@@ -43,6 +43,14 @@ class MerchantTest < Minitest::Test
   # Business Intelligence
 
   def test_it_can_calculate_total_revenue_per_merchant
-    assert_equal BigDecimal.new("109080"), merchant.revenue
+    assert_equal BigDecimal.new("249657"), merchant.revenue_per_merchant
+  end
+
+  def test_it_can_calculate_total_items_per_merchant
+    assert_equal 13, merchant.items_per_merchant
+  end
+
+  def test_it_can_calculate_revenue_on_a_date_per_merchant
+    assert_equal BigDecimal.new("140577"), merchant.revenue(Date.parse("2012-03-25"))
   end
 end

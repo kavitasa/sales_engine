@@ -41,12 +41,22 @@ class MerchantRepository
 
   def calculate_total_revenue_per_merchant
     invoice_revenue = sales_engine.calculate_total_invoice_revenue_per_merchant(id)
-
   end
 
   def most_revenue(x)
-    ranked_merchants = merchants.sort_by { |merchant| merchant.revenue }
+    ranked_merchants = merchants.sort_by { |merchant| merchant.revenue_per_merchant }
     top_merchants = ranked_merchants[0..(x-1)]
+  end
+
+  def most_items(x)
+    ranked_merchants = merchants.sort_by { |merchant| merchant.items_per_merchant }
+    top_merchants = ranked_merchants[0..(x-1)]
+  end
+
+  def revenue(date)
+    merchants.reduce(0) do |revenue, merchant|
+       revenue + merchant.revenue(date)
+     end
   end
 
   private

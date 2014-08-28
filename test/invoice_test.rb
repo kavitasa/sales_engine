@@ -31,7 +31,7 @@ class InvoiceTest < Minitest::Test
     assert_equal 1, invoice.customer_id
     assert_equal 26, invoice.merchant_id
     assert_equal "shipped", invoice.status
-    assert_equal "2012-03-25 09:54:09 UTC", invoice.created_at
+    assert_equal Date.parse("2012-03-25"), invoice.created_at
     assert_equal "2012-03-25 09:54:09 UTC", invoice.updated_at
     assert invoice.repository
   end
@@ -61,6 +61,10 @@ class InvoiceTest < Minitest::Test
   # Business Intelligence
 
   def test_it_can_calculate_total_revenue_per_invoice
-    assert_equal BigDecimal.new("2106777"), invoice.total
+    assert_equal BigDecimal.new("2106777"), invoice.total_price_per_invoice
+  end
+
+  def test_it_can_calculate_total_items_per_invoice
+    assert_equal 47, invoice.total_items_per_invoice
   end
 end

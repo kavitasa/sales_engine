@@ -47,7 +47,11 @@ class InvoiceItemTest < Minitest::Test
 
   # Business Intelligence
 
-  def test_invoice_item_returns_total_price
-    assert_equal BigDecimal.new("13635") * 5, invoice_item.total_price
+  def test_it_returns_total_price
+    assert_equal BigDecimal.new("13635") * 5, invoice_item.total_price_per_invoice_item
+  end
+
+  def test_it_returns_total_items
+    assert_equal 5, invoice_item.total_items_per_invoice_item
   end
 end
