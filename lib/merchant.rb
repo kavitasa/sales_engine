@@ -21,14 +21,10 @@ class Merchant
     @repository.find_all_invoices_by_id(id)
   end
 
-  def revenue_per_merchant
-    start_value = BigDecimal.new("0")
-    invoices.map(&:total_price_per_invoice).reduce(start_value, :+)
-  end
+  def revenue(date = nil)
+    invoices_to_sum = date ? invoices_for_date(invoices, date) : invoices
 
-  def revenue(date)
-    all_invoices = @repository.find_all_invoices_by_id(id)
-    invoices_for_date(all_invoices, date).
+    invoices_to_sum.
       map(&:total_price_per_invoice).
       reduce(BigDecimal.new("0"), :+)
   end
@@ -44,6 +40,6 @@ class Merchant
   end
 
   def invoices_for_date(invoices, date)
-    invoices.select { |invoice| invoice.created_at == date }
+    invoices.find_all { |invoice| invoice.created_at == date }
   end
 end

@@ -42,8 +42,8 @@ class MerchantTest < Minitest::Test
 
   # Business Intelligence
 
-  def test_it_can_calculate_total_revenue_per_merchant
-    assert_equal BigDecimal.new("249657"), merchant.revenue_per_merchant
+  def test_it_can_calculate_total_revenue
+    assert_equal BigDecimal.new("249657"), merchant.revenue
   end
 
   def test_it_can_calculate_total_items_per_merchant

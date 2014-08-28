@@ -44,7 +44,7 @@ class MerchantRepository
   end
 
   def most_revenue(x)
-    ranked_merchants = merchants.sort_by { |merchant| merchant.revenue_per_merchant }
+    ranked_merchants = merchants.sort_by { |merchant| merchant.revenue }
     top_merchants = ranked_merchants[0..(x-1)]
   end
 
