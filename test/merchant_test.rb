@@ -46,8 +46,8 @@ class MerchantTest < Minitest::Test
     assert_equal BigDecimal.new("249657"), merchant.revenue
   end
 
-  def test_it_can_calculate_total_items_per_merchant
-    assert_equal 13, merchant.items_per_merchant
+  def test_it_can_calculate_total_items
+    assert_equal 13, merchant.total_items
   end
 
   def test_it_can_calculate_revenue_on_a_date_per_merchant

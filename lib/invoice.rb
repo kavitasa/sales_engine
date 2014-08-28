@@ -38,13 +38,13 @@ class Invoice
     @repository.find_merchant_by_merchant_id(merchant_id)
   end
 
-  def total_price_per_invoice
+  def total_price
     start_value = BigDecimal.new("0")
-    invoice_items.map(&:total_price_per_invoice_item).reduce(start_value, :+)
+    invoice_items.map(&:total_price).reduce(start_value, :+)
   end
 
-  def total_items_per_invoice
-    invoice_items.map(&:total_items_per_invoice_item).reduce(0, :+)
+  def total_items
+    invoice_items.map(&:total_items).reduce(0, :+)
   end
 
   private

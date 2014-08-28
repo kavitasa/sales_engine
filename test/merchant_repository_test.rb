@@ -97,7 +97,7 @@ class MerchantRepositoryTest < Minitest::Test
   def test_it_can_return_top_x_merchant_instances_ranked_by_total_items
     merchants = merchant_repo.most_items(10)
     assert_equal 10, merchants.count
-    assert merchants[0].items_per_merchant >= merchants[1].items_per_merchant
+    assert merchants[0].total_items >= merchants[1].total_items
   end
 
   def test_it_can_return_total_revenue_for_a_date_for_all_merchants

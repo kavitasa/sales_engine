@@ -25,12 +25,12 @@ class Merchant
     invoices_to_sum = date ? invoices_for_date(invoices, date) : invoices
 
     invoices_to_sum.
-      map(&:total_price_per_invoice).
+      map(&:total_price).
       reduce(BigDecimal.new("0"), :+)
   end
 
-  def items_per_merchant
-    invoices.map(&:total_items_per_invoice).reduce(0, :+)
+  def total_items
+    invoices.map(&:total_items).reduce(0, :+)
   end
 
   private

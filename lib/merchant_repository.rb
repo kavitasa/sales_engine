@@ -49,7 +49,7 @@ class MerchantRepository
   end
 
   def most_items(x)
-    ranked_merchants = merchants.sort_by { |merchant| merchant.items_per_merchant }
+    ranked_merchants = merchants.sort_by { |merchant| merchant.total_items }
     top_merchants = ranked_merchants[0..(x-1)]
   end
 
